@@ -15,7 +15,7 @@ config :devtest_elixir, DevtestElixir.Repo,
 
 # We don't run a server during test. If one is required,
 # you can enable the server option below.
-config :devtest_elixir, DevtestElixirWeb.Endpoint,
+config :devtest_elixir, PrivateAPI.Endpoint,
   http: [ip: {127, 0, 0, 1}, port: 4002],
   secret_key_base: "YclIRt76VzIEu9cLBtUKEOf00Y8I/C2gJM06pGWLuG/AnH+y4OA38R75bFwDtXXH",
   server: false

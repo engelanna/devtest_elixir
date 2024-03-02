@@ -12,11 +12,11 @@ config :devtest_elixir,
   generators: [timestamp_type: :utc_datetime, binary_id: true]
 
 # Configures the endpoint
-config :devtest_elixir, DevtestElixirWeb.Endpoint,
+config :devtest_elixir, PrivateAPI.Endpoint,
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
-    formats: [json: DevtestElixirWeb.ErrorJSON],
+    formats: [json: PrivateAPI.ErrorJSON],
     layout: false
   ],
   pubsub_server: DevtestElixir.PubSub,

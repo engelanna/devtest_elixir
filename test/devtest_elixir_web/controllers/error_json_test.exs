@@ -1,12 +1,12 @@
-defmodule DevtestElixirWeb.ErrorJSONTest do
-  use DevtestElixirWeb.ConnCase, async: true
+defmodule PrivateAPI.ErrorJSONTest do
+  use PrivateAPI.ConnCase, async: true
 
   test "renders 404" do
-    assert DevtestElixirWeb.ErrorJSON.render("404.json", %{}) == %{errors: %{detail: "Not Found"}}
+    assert PrivateAPI.ErrorJSON.render("404.json", %{}) == %{errors: %{detail: "Not Found"}}
   end
 
   test "renders 500" do
-    assert DevtestElixirWeb.ErrorJSON.render("500.json", %{}) ==
+    assert PrivateAPI.ErrorJSON.render("500.json", %{}) ==
              %{errors: %{detail: "Internal Server Error"}}
   end
 end
