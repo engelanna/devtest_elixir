@@ -1,4 +1,4 @@
-defmodule DevtestElixirWeb.Telemetry do
+defmodule PrivateAPI.Telemetry do
   use Supervisor
   import Telemetry.Metrics
 
@@ -86,7 +86,7 @@ defmodule DevtestElixirWeb.Telemetry do
     [
       # A module, function and arguments to be invoked periodically.
       # This function must call :telemetry.execute/3 and a metric must be added above.
-      # {DevtestElixirWeb, :count_users, []}
+      # {PrivateAPI, :count_users, []}
     ]
   end
 end
