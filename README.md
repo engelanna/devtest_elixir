@@ -1,5 +1,12 @@
 # DevtestElixir
 
+1 Phoenix app == 2 isolated APIs (separate ports)
+
+  * no umbrella as those are 100% pointless: if you want separate supervision trees, why keep (& deploy) the apps together?
+  * no silly, artificial Contexts: Contexts were invented to extract methods from fat models (+ you should do ONE thing WELL)
+
+  Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
