@@ -61,6 +61,7 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+config :private_api, :api_token, "IIxyXkKDsCiLZvQ8nLwKKeg1TbrgUzZRUTEs7PsKbaf+gfPv/8OXtp8YE86Oa/d7"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
