@@ -11,9 +11,9 @@ config :devtest_elixir,
   ecto_repos: [DevtestElixir.Repo],
   generators: [timestamp_type: :utc_datetime, binary_id: true]
 
-# Configures the endpoint
-config :devtest_elixir, namespace: PrivateAPI
+config :devtest_elixir, namespace: PrivateAPI # TODO: Remove once PrivateAPI's application.ex has been set up
 config :devtest_elixir, PrivateAPI.Endpoint,
+  api_token: "IIxyXkKDsCiLZvQ8nLwKKeg1TbrgUzZRUTEs7PsKbaf+gfPv/8OXtp8YE86Oa/d7", # TODO: Move to PrivateAPI namespace once namespace has been set up
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
@@ -61,7 +61,6 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
-config :private_api, :api_token, "IIxyXkKDsCiLZvQ8nLwKKeg1TbrgUzZRUTEs7PsKbaf+gfPv/8OXtp8YE86Oa/d7"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
