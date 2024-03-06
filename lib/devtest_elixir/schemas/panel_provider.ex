@@ -10,7 +10,6 @@ defmodule DevtestElixir.Schemas.PanelProvider do
     timestamps(type: :utc_datetime)
   end
 
-  @doc false
   def changeset(panel_provider, attrs) do
     panel_provider
     |> cast(attrs, [:pricing_strategy_code])

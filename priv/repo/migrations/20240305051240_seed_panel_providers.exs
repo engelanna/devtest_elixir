@@ -30,8 +30,8 @@ defmodule DevtestElixir.Repo.Migrations.SeedPanelProviders do
           from(
             pp in PanelProvider,
             where:
-              pp.id == ^seed[:id] and
-              pp.pricing_strategy_code == ^seed[:pricing_strategy_code]
+              pp.id == ^seed.id and
+              pp.pricing_strategy_code == ^seed.pricing_strategy_code
           )
         )
       end
