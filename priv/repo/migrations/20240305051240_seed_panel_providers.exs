@@ -3,6 +3,7 @@ defmodule DevtestElixir.Repo.Migrations.SeedPanelProviders do
 
   import Ecto.Query, only: [from: 2]
 
+  alias DevtestElixir.Contexts.UTCTimestampNoMicroseconds
   alias DevtestElixir.Repo
   alias DevtestElixir.Schemas.PanelProvider
 
@@ -12,10 +13,7 @@ defmodule DevtestElixir.Repo.Migrations.SeedPanelProviders do
   """
   def up do
     if Repo.aggregate(PanelProvider, :count) == 0 do
-      Enum.each(
-        seeds(),
-        fn seed -> %PanelProvider{} |> PanelProvider.changeset(seed) |> Repo.insert! end
-      )
+      Repo.insert_all(PanelProvider, seeds())
     end
   end
 
@@ -40,10 +38,27 @@ defmodule DevtestElixir.Repo.Migrations.SeedPanelProviders do
 
 
   defp seeds do
+    timestamp = UTCTimestampNoMicroseconds.new()
+
     [
-      %{id: 1, pricing_strategy_code: "count_characters_at_url_then_divide"},
-      %{id: 2, pricing_strategy_code: "count_arrays_over_n_elements_at_url"},
-      %{id: 3, pricing_strategy_code: "count_html_nodes_at_url_then_divide"}
+      %{
+        id: 1,
+        pricing_strategy_code: "count_characters_at_url_then_divide",
+        inserted_at: timestamp,
+        updated_at: timestamp
+      },
+      %{
+        id: 2,
+        pricing_strategy_code: "count_arrays_over_n_elements_at_url",
+        inserted_at: timestamp,
+        updated_at: timestamp
+      },
+      %{
+        id: 3,
+        pricing_strategy_code: "count_html_nodes_at_url_then_divide",
+        inserted_at: timestamp,
+        updated_at: timestamp
+      }
     ]
   end
 end
