@@ -6,7 +6,7 @@ defmodule DevtestElixir.Schemas.Location do
   import Ecto.Changeset
   import DevtestElixir.Contexts.SecretCodeContext
 
-  # alias DevtestElixir.Schemas.LocationGroup
+  alias DevtestElixir.Schemas.LocationGroup
 
   @primary_key {:id, :binary_id, autogenerate: true}
   schema "locations" do
@@ -17,7 +17,7 @@ defmodule DevtestElixir.Schemas.Location do
     field :secret_code_hash, :string
     field :secret_code_salt, :string
 
-    # many_to_many :location_groups, LocationGroup, join_through: "locations_location_groups"
+    many_to_many :location_groups, LocationGroup, join_through: "locations_location_groups"
 
     timestamps(type: :utc_datetime)
   end

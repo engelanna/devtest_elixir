@@ -2,8 +2,9 @@ defmodule DevtestElixir.Schemas.LocationGroup do
   @moduledoc false
 
   use Ecto.Schema
-
   import Ecto.Changeset
+
+  alias DevtestElixir.Schemas.Location
 
   @primary_key {:id, :binary_id, autogenerate: true}
   schema "location_groups" do
@@ -11,6 +12,8 @@ defmodule DevtestElixir.Schemas.LocationGroup do
 
     field :country_id, :binary_id
     field :panel_provider_id, :integer
+
+    many_to_many :locations, Location, join_through: "locations_location_groups"
 
     timestamps(type: :utc_datetime)
   end
