@@ -6,7 +6,7 @@ defmodule DevtestElixir.Schemas.TargetGroup do
   import Ecto.Changeset
   import DevtestElixir.Contexts.SecretCodeContext
 
-  # alias DevtestElixir.Schemas.Country
+  alias DevtestElixir.Schemas.Country
   # alias DevtestElixir.Schemas.Location
 
   @primary_key {:id, :binary_id, autogenerate: true}
@@ -20,7 +20,8 @@ defmodule DevtestElixir.Schemas.TargetGroup do
     field :secret_code_salt, :string
 
     belongs_to :panel_provider, PanelProvider
-    # many_to_many :countries, Country, join_through: "countries_target_groups"
+
+    many_to_many :countries, Country, join_through: "countries_target_groups"
     # many_to_many :locations, Location, join_through: "locations_location_groups"
 
     timestamps(type: :utc_datetime)
