@@ -1,4 +1,4 @@
-defmodule DevtestElixir.Schemas.Location do
+defmodule DevtestElixir.Schemas.TargetGroup do
   @moduledoc false
 
   use Ecto.Schema
@@ -6,25 +6,30 @@ defmodule DevtestElixir.Schemas.Location do
   import Ecto.Changeset
   import DevtestElixir.Contexts.SecretCodeContext
 
-  # alias DevtestElixir.Schemas.LocationGroup
+  # alias DevtestElixir.Schemas.Country
+  # alias DevtestElixir.Schemas.Location
 
   @primary_key {:id, :binary_id, autogenerate: true}
-  schema "locations" do
+  schema "target_groups" do
     field :external_id, Ecto.UUID, autogenerate: true
+    field :parent_id, Ecto.UUID
     field :name, :string
 
     field :secret_code, :string, [virtual: true]
     field :secret_code_hash, :string
     field :secret_code_salt, :string
 
-    # many_to_many :location_groups, LocationGroup, join_through: "locations_location_groups"
+    belongs_to :panel_provider, PanelProvider
+    # many_to_many :countries, Country, join_through: "countries_target_groups"
+    # many_to_many :locations, Location, join_through: "locations_location_groups"
 
     timestamps(type: :utc_datetime)
   end
 
-  def changeset(location, attrs) do
-    location
-    |> cast(attrs, [:external_id, :name, :secret_code])
+  @doc false
+  def changeset(target_group, attrs) do
+    target_group
+    |> cast(attrs, [:external_id, :parent_id, :name, :secret_code])
     |> put_secret_code_hash()
     |> validate_required([:external_id, :name, :secret_code_hash, :secret_code_salt])
   end
