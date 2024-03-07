@@ -7,7 +7,6 @@ defmodule DevtestElixir.Schemas.TargetGroup do
   import DevtestElixir.Contexts.SecretCodeContext
 
   alias DevtestElixir.Schemas.Country
-  # alias DevtestElixir.Schemas.Location
 
   @primary_key {:id, :binary_id, autogenerate: true}
   schema "target_groups" do
@@ -22,7 +21,6 @@ defmodule DevtestElixir.Schemas.TargetGroup do
     belongs_to :panel_provider, PanelProvider
 
     many_to_many :countries, Country, join_through: "countries_target_groups"
-    # many_to_many :locations, Location, join_through: "locations_location_groups"
 
     timestamps(type: :utc_datetime)
   end
@@ -31,7 +29,7 @@ defmodule DevtestElixir.Schemas.TargetGroup do
   def changeset(target_group, attrs) do
     target_group
     |> cast(attrs, [:external_id, :parent_id, :name, :secret_code])
-    |> put_secret_code_hash()
+    |> put_secret_code_hash_and_salt()
     |> validate_required([:external_id, :name, :secret_code_hash, :secret_code_salt])
   end
 end

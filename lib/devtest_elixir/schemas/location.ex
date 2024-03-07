@@ -25,7 +25,7 @@ defmodule DevtestElixir.Schemas.Location do
   def changeset(location, attrs) do
     location
     |> cast(attrs, [:external_id, :name, :secret_code])
-    |> put_secret_code_hash()
+    |> put_secret_code_hash_and_salt()
     |> validate_required([:external_id, :name, :secret_code_hash, :secret_code_salt])
   end
 end

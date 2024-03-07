@@ -25,7 +25,12 @@ defmodule DevtestElixir.Contexts.SecretCodeContext do
   }
 
 
-  def put_secret_code_hash(changeset) do
+  def hash_secret_code_with_salt(secret_code, salt) do
+    :crypto.hash(@hashing_secrets_config[:algorithm], secret_code <> salt)
+    |> Base.encode16(case: @hashing_secrets_config[:font_case])
+  end
+
+  def put_secret_code_hash_and_salt(changeset) do
     case get_field(changeset, :secret_code) do
       nil -> changeset
       secret_code ->
@@ -33,17 +38,12 @@ defmodule DevtestElixir.Contexts.SecretCodeContext do
 
         changeset
         |> put_change(:secret_code_salt, salt)
-        |> put_change(:secret_code_hash, hash_secret_code(secret_code, salt))
+        |> put_change(:secret_code_hash, hash_secret_code_with_salt(secret_code, salt))
+    end
   end
- end
 
 
   defp generate_salt do
     :crypto.strong_rand_bytes(@hashing_secrets_config.salt_length) |> Base.encode64()
-  end
-
-  defp hash_secret_code(secret_code, salt) do
-    :crypto.hash(@hashing_secrets_config[:algorithm], secret_code <> salt)
-    |> Base.encode16(case: @hashing_secrets_config[:font_case])
   end
 end
