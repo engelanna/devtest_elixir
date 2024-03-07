@@ -2,6 +2,7 @@ defmodule DevtestElixir.Schemas.PanelProvider do
   @moduledoc false
 
   use Ecto.Schema
+
   import Ecto.Changeset
 
   schema "panel_providers" do

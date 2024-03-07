@@ -1,0 +1,29 @@
+defmodule DevtestElixir.Schemas.Location do
+  @moduledoc false
+
+  use Ecto.Schema
+
+  import Ecto.Changeset
+  import DevtestElixir.Contexts.LocationContext
+
+  @primary_key {:id, :binary_id, autogenerate: true}
+  schema "locations" do
+    field :external_id, Ecto.UUID, autogenerate: true
+    field :name, :string
+
+    field :secret_code, :string, [virtual: true]
+    field :secret_code_hash, :string
+    field :secret_code_salt, :string
+
+    # many_to_many :location_groups, MyApp.LocationGroup, join_through: "locations_location_groups"
+
+    timestamps(type: :utc_datetime)
+  end
+
+  def changeset(location, attrs) do
+    location
+    |> cast(attrs, [:external_id, :name, :secret_code])
+    |> put_secret_code_hash()
+    |> validate_required([:external_id, :name, :secret_code_hash, :secret_code_salt])
+  end
+end
