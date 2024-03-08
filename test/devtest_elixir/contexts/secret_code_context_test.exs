@@ -6,7 +6,9 @@ defmodule DevtestElixir.Contexts.SecretCodeContextTest do
   alias DevtestElixir.Schemas.Location
 
   setup do
-    [location: elem(create_location(), 1)]
+    {:ok, location} = create_location()
+
+    [location: location]
   end
 
   test "should compute the hash (from secret_code + salt) in a reproducible way", %{location: location} do
