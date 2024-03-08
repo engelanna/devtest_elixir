@@ -1,4 +1,4 @@
-defmodule PrivateAPI.Plugs.VerifyTokenTest do
+defmodule Test.PrivateAPI.Plugs.VerifyTokenTest do
   use ExUnit.Case, async: true
   use Plug.Test
 

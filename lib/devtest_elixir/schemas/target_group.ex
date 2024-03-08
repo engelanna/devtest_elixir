@@ -7,6 +7,7 @@ defmodule DevtestElixir.Schemas.TargetGroup do
   import DevtestElixir.Contexts.SecretCodeContext
 
   alias DevtestElixir.Schemas.Country
+  alias DevtestElixir.Schemas.CountryTargetGroup
 
   @primary_key {:id, :binary_id, autogenerate: true}
   schema "target_groups" do
@@ -20,7 +21,7 @@ defmodule DevtestElixir.Schemas.TargetGroup do
 
     belongs_to :panel_provider, PanelProvider
 
-    many_to_many :countries, Country, join_through: "countries_target_groups"
+    many_to_many :countries, Country, join_through: CountryTargetGroup
 
     timestamps(type: :utc_datetime)
   end
