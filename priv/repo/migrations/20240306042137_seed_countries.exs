@@ -3,7 +3,7 @@ defmodule DevtestElixir.Repo.Migrations.SeedCountries do
 
   import Ecto.Query, only: [from: 2]
 
-  alias DevtestElixir.Contexts.UTCTimestampNoMicroseconds
+  alias DevtestElixir.Contexts.Shared.UTCTimestampNoMicroseconds
   alias DevtestElixir.Repo
   alias DevtestElixir.Schemas.Country
 

@@ -5,11 +5,11 @@ defmodule Test.Support.Factories.TargetGroupFactory do
   alias DevtestElixir.Schemas.TargetGroup
 
   def create(parent_id \\ nil) do
-    build(parent_id)
+    changeset(parent_id)
     |> Repo.insert()
   end
 
-  def build(parent_id \\ nil) do
+  def changeset(parent_id \\ nil) do
     %TargetGroup{}
     |> TargetGroup.changeset(
       %{

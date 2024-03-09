@@ -1,4 +1,4 @@
-defmodule PrivateAPI.Repo.Migrations.CreateTargetGroups do
+defmodule DevtestElixir.Repo.Migrations.CreateTargetGroups do
   use Ecto.Migration
 
   def change do

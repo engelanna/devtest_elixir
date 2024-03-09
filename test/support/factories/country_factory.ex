@@ -5,11 +5,11 @@ defmodule Test.Support.Factories.CountryFactory do
   alias DevtestElixir.Schemas.Country
 
   def create() do
-    build()
+    changeset()
     |> Repo.insert()
   end
 
-  def build() do
+  def changeset() do
     %Country{}
     |> Country.changeset(
       %{

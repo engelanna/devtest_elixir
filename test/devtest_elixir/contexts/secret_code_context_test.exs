@@ -1,7 +1,7 @@
-defmodule DevtestElixir.Contexts.SecretCodeContextTest do
+defmodule DevtestElixir.Contexts.Shared.SecretCodeContextTest do
   use DevtestElixir.DataCase, async: true
 
-  alias DevtestElixir.Contexts.SecretCodeContext
+  alias DevtestElixir.Contexts.Shared.SecretCodeContext
   alias DevtestElixir.Repo
   alias DevtestElixir.Schemas.Location
 

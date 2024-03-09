@@ -1,4 +1,4 @@
-defmodule DevtestElixir.Contexts.UTCTimestampNoMicroseconds do
+defmodule DevtestElixir.Contexts.Shared.UTCTimestampNoMicroseconds do
   @moduledoc false
 
   def new do
