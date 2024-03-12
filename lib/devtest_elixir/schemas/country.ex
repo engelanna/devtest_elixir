@@ -4,9 +4,7 @@ defmodule DevtestElixir.Schemas.Country do
   use Ecto.Schema
 
   import Ecto.Changeset
-  import Ecto.Query
 
-  alias DevtestElixir.Repo
   alias DevtestElixir.Schemas.LocationGroup
   alias DevtestElixir.Schemas.PanelProvider
   alias DevtestElixir.Schemas.TargetGroup
@@ -26,22 +24,6 @@ defmodule DevtestElixir.Schemas.Country do
     country
     |> cast(attrs, [:country_code, :panel_provider_id])
     |> validate_required([:country_code])
-    |> validate_each_target_group_is_root()
-  end
-
-
-  defp validate_each_target_group_is_root(changeset) do
-    validate_change(changeset, :target_groups, fn :target_groups, target_groups ->
-      roots = Repo.all(
-        from tg in TargetGroup,
-        where: tg.id in ^target_groups and is_nil(tg.parent_id)
-      )
-
-      if length(target_groups) == length(roots) do
-        []
-      else
-        [{:target_groups, "All target groups must be root nodes (i.e. none of them may have a .parent_id"}]
-      end
-    end)
+    |> cast_assoc(:target_groups, with: &TargetGroup.country_association_changeset/2)
   end
 end

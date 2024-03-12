@@ -26,28 +26,25 @@ defmodule DevtestElixir.Schemas.TargetGroup do
     timestamps(type: :utc_datetime)
   end
 
-  @doc false
   def changeset(target_group, attrs) do
     target_group
     |> cast(attrs, [:external_id, :parent_id, :name, :secret_code])
-    |> cast_assoc(:countries)
     |> SecretCodeContext.put_secret_code_hash_and_salt()
     |> validate_required([:external_id, :name, :secret_code_hash, :secret_code_salt])
-    |> validate_being_root_for_country_association()
+    |> cast_assoc(:countries, with: &Country.changeset/2)
   end
 
+  def country_association_changeset(target_group, attrs) do
+    changeset(target_group, attrs)
+    |> validate_being_root_for_country_association
+  end
 
   defp validate_being_root_for_country_association(changeset) do
-      validate_change(changeset,
-                      :countries,
-                      fn :parent_id, parent_id ->
-
-                        if parent_id do
-                          [title: "Cannot associate a non-root (parent_id-having) TargetGroup with a Country"]
-                        else
-                          []
-                        end
-
-                      end)
+    if get_field(changeset, :parent_id) do
+      add_error(changeset, :parent_id,
+        "Only root TargetGroups (those without .parent_id) may be associated with Countries")
+    else
+      changeset
+    end
   end
 end

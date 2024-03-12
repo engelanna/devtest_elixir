@@ -7,9 +7,11 @@ defmodule Test.Support.Factories.TargetGroupFactory do
   def create(parent_id \\ nil) do
     changeset(parent_id)
     |> Repo.insert()
+    |> elem(1)
+    |> Repo.preload(:countries)
   end
 
-  def changeset(parent_id \\ nil) do
+  defp changeset(parent_id) do
     %TargetGroup{}
     |> TargetGroup.changeset(
       %{

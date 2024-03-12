@@ -7,38 +7,56 @@ defmodule Test.DevtestElixir.Schemas.CountryTest do
   alias Test.Support.Factories.TargetGroupFactory
 
   setup do
-    {:ok, root_target_group} = TargetGroupFactory.create()
-    {:ok, nonroot_target_group} = TargetGroupFactory.create(root_target_group.id)
+    root_target_group = TargetGroupFactory.create()
+    nonroot_target_group = TargetGroupFactory.create(root_target_group.id)
 
     [
-      country_linked_to_root: country_associated_with([root_target_group]),
-      country_linked_to_nonroot: country_associated_with([nonroot_target_group]),
-      country_linked_to_both: country_associated_with([root_target_group, nonroot_target_group])
+      country_linked_to_both: country_changeset_with_target_groups([root_target_group, nonroot_target_group]),
+      country_linked_to_nonroot: country_changeset_with_target_groups([nonroot_target_group]),
+      country_linked_to_root: country_changeset_with_target_groups([root_target_group])
     ]
   end
 
 
-  test "should allow saving a Country associated with a root TargetGroup",
+  test "allowing to insert a Country associated with a root TargetGroup",
     %{country_linked_to_root: country_linked_to_root} do
 
     assert {:ok, _} = Repo.insert(country_linked_to_root)
   end
 
-  test "should refuse saving a Country associated with a nonroot TargetGroup",
+  test "refusing to insert a Country associated with a nonroot TargetGroup",
     %{country_linked_to_nonroot: country_linked_to_nonroot} do
 
-    assert {:error, [{:target_groups, "All target groups must be root nodes (i.e. none of them may have a .parent_id"}]} = Repo.insert(country_linked_to_nonroot)
+    assert {:error, result} = Repo.insert(country_linked_to_nonroot)
+
+    assert List.first(result.changes.target_groups).errors == [
+      parent_id: {
+        "Only root TargetGroups (those without .parent_id) may be associated with Countries",
+        []
+      }
+    ]
   end
 
-  test "should refuse saving a Country associated with multiple TargetGroups some of which aren't root",
+  test "refusing to insert a Country associated with multiple TargetGroups some of which aren't root",
     %{country_linked_to_both: country_linked_to_both} do
+      assert {:error, result} = Repo.insert(country_linked_to_both)
 
-    assert {:error, [{:target_groups, "All target groups must be root nodes (i.e. none of them may have a .parent_id"}]} = Repo.insert(country_linked_to_both)
+      assert Enum.map(result.changes.target_groups, fn tg -> tg.errors end) == [
+        [],
+        [
+          parent_id: {
+            "Only root TargetGroups (those without .parent_id) may be associated with Countries",
+            []
+          }
+        ]
+      ]
   end
 
-  defp country_associated_with(target_groups) do
+
+  defp country_changeset_with_target_groups(target_group_structs) do
+    target_group_maps = Enum.map(target_group_structs, &Map.from_struct/1)
+
     CountryFactory.changeset()
-    |> Country.changeset(%{})
-    |> put_assoc(:target_groups, target_groups)
+    |> Country.changeset(%{target_groups: target_group_maps})
   end
 end

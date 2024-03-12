@@ -17,7 +17,7 @@ defmodule Test.PrivateAPI.Plugs.VerifyTokenTest do
     }
   end
 
-  test "should establish connection when API token correct", %{conn: conn, tokens: %{correct: correct_token}} do
+  test "establishing connection when API token correct", %{conn: conn, tokens: %{correct: correct_token}} do
     conn_status_before_plug = conn.status
 
     conn = conn |> put_req_header("authorization", "bearer #{correct_token}")
@@ -28,7 +28,7 @@ defmodule Test.PrivateAPI.Plugs.VerifyTokenTest do
     refute conn.halted
   end
 
-  test "should halt the connection when API token wrong", %{conn: conn, tokens: %{wrong: wrong_token}} do
+  test "halting the connection when API token wrong", %{conn: conn, tokens: %{wrong: wrong_token}} do
     refute conn.status == :unauthorized
 
     conn = conn |> put_req_header("authorization", "bearer #{wrong_token}")
@@ -38,7 +38,7 @@ defmodule Test.PrivateAPI.Plugs.VerifyTokenTest do
     assert conn.halted
   end
 
-  test "should halt the connection when API token missing", %{conn: conn, tokens: %{missing: no_token}} do
+  test "halting the connection when API token missing", %{conn: conn, tokens: %{missing: no_token}} do
     refute conn.status == :unauthorized
 
     conn = conn |> put_req_header("authorization", "bearer #{no_token}")

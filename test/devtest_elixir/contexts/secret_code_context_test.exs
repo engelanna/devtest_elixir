@@ -11,7 +11,7 @@ defmodule DevtestElixir.Contexts.Shared.SecretCodeContextTest do
     [location: location]
   end
 
-  test "should compute the hash (from secret_code + salt) in a reproducible way", %{location: location} do
+  test "computing the hash (from secret_code + salt) in a reproducible way", %{location: location} do
     expected_hash = location.secret_code_hash
     actual_hash = SecretCodeContext.hash_secret_code_with_salt(
       predefined_secret_code(),

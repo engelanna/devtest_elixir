@@ -17,6 +17,6 @@ defmodule DevtestElixir.Repo.Migrations.CreateTargetGroups do
       timestamps(type: :utc_datetime)
     end
 
-    create index(:target_groups, [:panel_provider_id])
+    create index(:target_groups, :panel_provider_id)
   end
 end
