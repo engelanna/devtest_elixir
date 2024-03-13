@@ -4,22 +4,22 @@ defmodule Test.Support.Factories.TargetGroupFactory do
   alias DevtestElixir.Repo
   alias DevtestElixir.Schemas.TargetGroup
 
-  def create(parent_id \\ nil) do
-    changeset(parent_id)
+  def create(opts \\ %{}) do
+    changeset(opts)
     |> Repo.insert()
     |> elem(1)
-    |> Repo.preload(:countries)
   end
 
-  defp changeset(parent_id) do
+  def changeset(opts \\ %{}) do
     %TargetGroup{}
     |> TargetGroup.changeset(
-      %{
-        parent_id: parent_id,
-        external_id: Ecto.UUID.generate(),
-        name: "does not matter",
-        secret_code: "does not matter"
-      }
-    )
+      Map.merge(
+        %{
+          external_id: Ecto.UUID.generate(),
+          name: "does not matter",
+          secret_code: "does not matter"
+        },
+        opts
+    ))
   end
 end

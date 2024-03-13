@@ -2,13 +2,12 @@ defmodule Test.DevtestElixir.Schemas.CountryTest do
   use DevtestElixir.DataCase, async: true
 
   alias DevtestElixir.Repo
-  alias DevtestElixir.Schemas.Country
   alias Test.Support.Factories.CountryFactory
   alias Test.Support.Factories.TargetGroupFactory
 
   setup do
     root_target_group = TargetGroupFactory.create()
-    nonroot_target_group = TargetGroupFactory.create(root_target_group.id)
+    nonroot_target_group = TargetGroupFactory.create(%{parent_id: root_target_group.id})
 
     [
       country_linked_to_both: country_changeset_with_target_groups([root_target_group, nonroot_target_group]),
@@ -56,7 +55,6 @@ defmodule Test.DevtestElixir.Schemas.CountryTest do
   defp country_changeset_with_target_groups(target_group_structs) do
     target_group_maps = Enum.map(target_group_structs, &Map.from_struct/1)
 
-    CountryFactory.changeset()
-    |> Country.changeset(%{target_groups: target_group_maps})
+    CountryFactory.changeset(%{target_groups: target_group_maps})
   end
 end

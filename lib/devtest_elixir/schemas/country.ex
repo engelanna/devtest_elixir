@@ -5,6 +5,7 @@ defmodule DevtestElixir.Schemas.Country do
 
   import Ecto.Changeset
 
+  alias DevtestElixir.Repo
   alias DevtestElixir.Schemas.LocationGroup
   alias DevtestElixir.Schemas.PanelProvider
   alias DevtestElixir.Schemas.TargetGroup
@@ -21,9 +22,10 @@ defmodule DevtestElixir.Schemas.Country do
   end
 
   def changeset(country, attrs) do
-    country
+    Repo.preload(country, :target_groups)
     |> cast(attrs, [:country_code, :panel_provider_id])
     |> validate_required([:country_code])
-    |> cast_assoc(:target_groups, with: &TargetGroup.country_association_changeset/2)
+    |> unique_constraint(:country_code)
+    |> cast_assoc(:target_groups, with: &TargetGroup.changeset/2)
   end
 end

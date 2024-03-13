@@ -1,36 +1,46 @@
-# defmodule Test.DevtestElixir.Schemas.TargetGroupTest do
-#   use DevtestElixir.DataCase, async: true
+defmodule Test.DevtestElixir.Schemas.TargetGroupTest do
+  use DevtestElixir.DataCase, async: true
 
-#   alias DevtestElixir.Repo
-#   alias DevtestElixir.Schemas.CountryTargetGroup
-#   alias Test.Support.Factories.CountryFactory
-#   alias Test.Support.Factories.TargetGroupFactory
+  alias DevtestElixir.Repo
+  alias DevtestElixir.Schemas.TargetGroup
+  alias Test.Support.Factories.CountryFactory
+  alias Test.Support.Factories.TargetGroupFactory
 
-#   setup do
-#     {:ok, country} = CountryFactory.create()
-#     {:ok, root_target_group} = TargetGroupFactory.create()
-#     {:ok, nonroot_target_group} = TargetGroupFactory.create(root_target_group.id)
+  setup do
+    root_target_group = TargetGroupFactory.create()
+    nonroot_target_group = TargetGroupFactory.create(%{parent_id: root_target_group.id})
 
-#     [country: country, root_target_group: root_target_group, nonroot_target_group: nonroot_target_group]
-#   end
+    [
+      root_target_group: target_group_changeset_with_country(root_target_group),
+      nonroot_target_group: target_group_changeset_with_country(nonroot_target_group)
+    ]
+  end
 
-#   test "should save CountryTargetGroup when TargetGroup is root",
-#     %{country: country, root_target_group: root_target_group} do
+  test "allowing to insert a root (no parent_id) TargetGroup which has a Country associated",
+    %{root_target_group: root_target_group} do
 
-#     assert {:ok, _} = associate(country.id, root_target_group.id)
-#   end
+    assert {:ok, _} = Repo.update(root_target_group)
+  end
 
-#   test "should refuse saving CountryTargetGroup when TargetGroup not root",
-#     %{country: country, nonroot_target_group: nonroot_target_group} do
+  test "refusing to insert a nonroot (has parent_id) TargetGroup which has a Country associated",
+    %{nonroot_target_group: nonroot_target_group} do
 
-#     assert {:error, changeset} = associate(country.id, nonroot_target_group.id)
-#     assert changeset.errors[:target_group_id] == {"must be a root node", []}
-#   end
+    assert {:error, changeset} = Repo.update(nonroot_target_group)
 
+    assert changeset.errors == [
+      parent_id: {
+        "Only root TargetGroups (those without .parent_id) may be associated with Countries",
+        []
+      }
+    ]
+  end
 
-#   defp associate(country_id, target_group_id) do
-#     %CountryTargetGroup{}
-#     |> CountryTargetGroup.changeset(%{country_id: country_id, target_group_id: target_group_id})
-#     |> Repo.insert()
-#   end
-# end
+  defp target_group_changeset_with_country(target_group_struct) do
+    new_country_map = Map.from_struct(CountryFactory.create())
+
+    TargetGroup.changeset(
+      target_group_struct,
+      %{countries: [new_country_map]}
+    )
+  end
+end
