@@ -3,13 +3,13 @@ defmodule PublicAPI.Router do
 
   use PublicAPI, :router
 
-  pipeline :default do
+  pipeline :v1 do
     plug :accepts, ["json"]
   end
 
   scope "/public_api", PublicAPI do
     scope "/v1", V1.Controllers do
-      pipe_through :default
+      pipe_through :v1
 
       resources "/locations", LocationController, only: [:show]
 
