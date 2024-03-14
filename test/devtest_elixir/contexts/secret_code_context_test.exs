@@ -1,5 +1,5 @@
 defmodule DevtestElixir.Contexts.Shared.SecretCodeContextTest do
-  use DevtestElixir.DataCase, async: true
+  use Test.Support.DataCase, async: true
 
   alias DevtestElixir.Contexts.Shared.SecretCodeContext
   alias DevtestElixir.Repo

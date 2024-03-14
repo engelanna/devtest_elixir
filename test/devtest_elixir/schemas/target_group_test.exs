@@ -1,5 +1,5 @@
 defmodule Test.DevtestElixir.Schemas.TargetGroupTest do
-  use DevtestElixir.DataCase, async: true
+  use Test.Support.DataCase, async: true
 
   alias DevtestElixir.Repo
   alias DevtestElixir.Schemas.TargetGroup

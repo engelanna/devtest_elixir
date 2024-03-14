@@ -1,4 +1,4 @@
-defmodule PrivateAPI.Support.ConnCase do
+defmodule Test.PrivateAPI.Support.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -32,7 +32,7 @@ defmodule PrivateAPI.Support.ConnCase do
   end
 
   setup tags do
-    DevtestElixir.DataCase.setup_sandbox(tags)
+    Test.Support.DataCase.setup_sandbox(tags)
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end
