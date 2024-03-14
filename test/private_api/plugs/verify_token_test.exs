@@ -1,10 +1,10 @@
-defmodule Test.PrivateAPI.Plugs.VerifyTokenTest do
+defmodule Test.PrivateAPI.V1.Plugs.VerifyTokenTest do
   use ExUnit.Case, async: true
   use Plug.Test
 
   import Plug.Conn.Status, only: [code: 1]
 
-  alias PrivateAPI.Plugs.VerifyToken
+  alias PrivateAPI.V1.Plugs.VerifyToken
 
   setup do
     {:ok,

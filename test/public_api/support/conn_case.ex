@@ -27,7 +27,7 @@ defmodule Test.PublicAPI.Support.ConnCase do
       # Import conveniences for testing with connections
       import Plug.Conn
       import Phoenix.ConnTest
-      import PublicAPI.ConnCase
+      import Test.PublicAPI.Support.ConnCase
     end
   end
 

@@ -19,18 +19,6 @@ defmodule PrivateAPI do
     end
   end
 
-  def controller do
-    quote do
-      use Phoenix.Controller,
-        formats: [:json]
-        # namespace: V1.Controllers
-
-      import Plug.Conn
-
-      unquote(verified_routes())
-    end
-  end
-
   def verified_routes do
     quote do
       use Phoenix.VerifiedRoutes,
@@ -39,6 +27,7 @@ defmodule PrivateAPI do
         statics: PrivateAPI.static_paths()
     end
   end
+
 
   @doc """
   When used, dispatch to the appropriate controller/view/etc.

@@ -1,4 +1,4 @@
-defmodule PublicAPI.V1.Views.ErrorJSON do
+defmodule PublicAPI.V1.Views.JSON.ErrorView do
   @moduledoc false
 
   # If you want to customize a particular status code,

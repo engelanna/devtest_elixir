@@ -5,11 +5,11 @@ defmodule PrivateAPI.Router do
 
   pipeline :v1 do
     plug :accepts, ["json"]
-    plug PrivateAPI.Plugs.VerifyToken
+    plug PrivateAPI.V1.Plugs.VerifyToken
   end
 
-  scope "/private_api", PrivateAPI do
-    scope "/v1", V1.Controllers do
+  scope "/private_api" do
+    scope "/v1", PrivateAPI.V1.Controllers do
       pipe_through :v1
 
       resources "/locations", LocationController, only: [:show]

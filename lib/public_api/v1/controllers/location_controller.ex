@@ -1,19 +1,19 @@
 defmodule PublicAPI.V1.Controllers.LocationController do
   @moduledoc false
 
-  use PublicAPI, :controller
+  use PublicAPI.V1.Controllers, :controller
 
-  alias DevtestElixir.Repo
+  # alias DevtestElixir.Repo
 
   # def index(conn, _params) do
   #   examples = Repo.all(Example)
   #   render(conn, "index.json", examples: examples)
   # end
 
-  def show(conn, %{"id" => id}) do
-    example = Repo.get!(Example, id)
-    render(conn, "show.json", example: example)
-  end
+  # def show(conn, %{"id" => id}) do
+  #   example = Repo.get!(Example, id)
+  #   render(conn, "show.json", example: example)
+  # end
 
   # def create(conn, %{"example" => example_params}) do
   #   changeset = Example.changeset(%Example{}, example_params)

@@ -7,8 +7,8 @@ defmodule PublicAPI.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/public_api", PublicAPI do
-    scope "/v1", V1.Controllers do
+  scope "/public_api" do
+    scope "/v1", PublicAPI.V1.Controllers do
       pipe_through :v1
 
       resources "/locations", LocationController, only: [:show]

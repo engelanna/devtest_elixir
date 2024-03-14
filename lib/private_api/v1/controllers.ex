@@ -1,7 +1,22 @@
 defmodule PrivateAPI.V1.Controllers do
   @moduledoc false
 
-  require PrivateAPI.V1.Controllers.LocationController
-  require PrivateAPI.V1.Controllers.TargetController
-  require PrivateAPI.V1.Controllers.TargetGroupController
+  def controller do
+    quote do
+      use Phoenix.Controller,
+        formats: [:json],
+        namespace: PrivateAPI.V1.Controllers
+
+      import Plug.Conn
+
+      unquote(PrivateAPI.verified_routes())
+    end
+  end
+
+
+
+
+  defmacro __using__(which) when is_atom(which) do
+    apply(__MODULE__, which, [])
+  end
 end
