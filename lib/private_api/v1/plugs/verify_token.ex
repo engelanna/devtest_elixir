@@ -3,8 +3,8 @@ defmodule PrivateAPI.V1.Plugs.VerifyToken do
   In order to pass this verification, a request has to have its "authorization" header set to:
     bearer Application.get_env(:private_api, :api_token)
   """
-
   import Plug.Conn
+
   require Logger
 
 

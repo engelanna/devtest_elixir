@@ -17,6 +17,23 @@ defmodule Test.PrivateAPI.Support.ConnCase do
 
   use ExUnit.CaseTemplate
 
+  setup tags do
+    Test.Support.DataCase.setup_sandbox(tags)
+    {:ok, conn: Phoenix.ConnTest.build_conn()}
+  end
+
+      import Plug.Conn
+
+  setup %{conn: conn} do
+    {:ok,
+    conn: put_req_header(conn, "accept", "application/json")
+       |> put_req_header(
+          "authorization", "bearer " <> Application.get_env(
+            :devtest_elixir, PrivateAPI.Endpoint
+          )[:api_token]
+        )}
+  end
+
   using do
     quote do
       # The default endpoint for testing
@@ -29,10 +46,5 @@ defmodule Test.PrivateAPI.Support.ConnCase do
       import Phoenix.ConnTest
       import Test.PrivateAPI.Support.ConnCase
     end
-  end
-
-  setup tags do
-    Test.Support.DataCase.setup_sandbox(tags)
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end

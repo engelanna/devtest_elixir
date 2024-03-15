@@ -23,6 +23,7 @@ defmodule Test.Support.Factories.CountryFactory do
     )
   end
 
+
   defp generate_unique_country_code do
     unique_country_code = Address.country_code()
     existing_codes = Repo.all(from(c in Country, select: c.country_code))

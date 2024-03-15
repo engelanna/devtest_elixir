@@ -16,6 +16,7 @@ defmodule Test.DevtestElixir.Schemas.TargetGroupTest do
     ]
   end
 
+
   test "allowing to insert a root (no parent_id) TargetGroup which has a Country associated",
     %{root_target_group: root_target_group} do
 
@@ -34,6 +35,7 @@ defmodule Test.DevtestElixir.Schemas.TargetGroupTest do
       }
     ]
   end
+
 
   defp target_group_changeset_with_country(target_group_struct) do
     new_country_map = Map.from_struct(CountryFactory.create())

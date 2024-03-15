@@ -14,8 +14,6 @@ defmodule PrivateAPI.V1.Controllers do
   end
 
 
-
-
   defmacro __using__(which) when is_atom(which) do
     apply(__MODULE__, which, [])
   end

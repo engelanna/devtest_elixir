@@ -8,17 +8,19 @@ defmodule PrivateAPI.Router do
     plug PrivateAPI.V1.Plugs.VerifyToken
   end
 
-  scope "/private_api" do
-    scope "/v1", PrivateAPI.V1.Controllers do
+  scope "private_api" do
+    scope "v1", PrivateAPI.V1.Controllers do
       pipe_through :v1
 
-      resources "/locations", LocationController, only: [:show]
+      get "locations/:country_code", LocationController, :locations_for_country_code, constraints: %{
+        country_code: ~r/[A-Z]{2}/
+      }
 
-      scope "/target_groups" do
-        get "/:id/:country_code", TargetGroupController, :show
-      end
+      # get "/target_groups/:country_code", TargetGroupController, :target_groups_for_country_code, constraints: %{
+      #   country_code: ~r/[A-Z]{2}/
+      # }
 
-      post "/evaluate_target", TargetController, :evaluate
+      # post "/evaluate_target", TargetController, :evaluate
     end
 
     # Enable LiveDashboard and Swoosh mailbox preview in development

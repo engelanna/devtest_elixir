@@ -17,38 +17,42 @@ defmodule Test.DevtestElixir.Schemas.CountryTest do
   end
 
 
-  test "allowing to insert a Country associated with a root TargetGroup",
-    %{country_linked_to_root: country_linked_to_root} do
+  describe "accepting a valid TargetGroup association" do
+    test "allowing to insert a Country associated with a root TargetGroup",
+      %{country_linked_to_root: country_linked_to_root} do
 
-    assert {:ok, _} = Repo.insert(country_linked_to_root)
+      assert {:ok, _} = Repo.insert(country_linked_to_root)
+    end
   end
 
-  test "refusing to insert a Country associated with a nonroot TargetGroup",
-    %{country_linked_to_nonroot: country_linked_to_nonroot} do
+  describe "refusing an invalid TargetGroup association" do
+    test "refusing to insert a Country associated with a nonroot TargetGroup",
+      %{country_linked_to_nonroot: country_linked_to_nonroot} do
 
-    assert {:error, result} = Repo.insert(country_linked_to_nonroot)
+      assert {:error, result} = Repo.insert(country_linked_to_nonroot)
 
-    assert List.first(result.changes.target_groups).errors == [
-      parent_id: {
-        "Only root TargetGroups (those without .parent_id) may be associated with Countries",
-        []
-      }
-    ]
-  end
-
-  test "refusing to insert a Country associated with multiple TargetGroups some of which aren't root",
-    %{country_linked_to_both: country_linked_to_both} do
-      assert {:error, result} = Repo.insert(country_linked_to_both)
-
-      assert Enum.map(result.changes.target_groups, fn tg -> tg.errors end) == [
-        [],
-        [
-          parent_id: {
-            "Only root TargetGroups (those without .parent_id) may be associated with Countries",
-            []
-          }
-        ]
+      assert List.first(result.changes.target_groups).errors == [
+        parent_id: {
+          "Only root TargetGroups (those without .parent_id) may be associated with Countries",
+          []
+        }
       ]
+    end
+
+    test "refusing to insert a Country associated with multiple TargetGroups some of which aren't root",
+      %{country_linked_to_both: country_linked_to_both} do
+        assert {:error, result} = Repo.insert(country_linked_to_both)
+
+        assert Enum.map(result.changes.target_groups, fn tg -> tg.errors end) == [
+          [],
+          [
+            parent_id: {
+              "Only root TargetGroups (those without .parent_id) may be associated with Countries",
+              []
+            }
+          ]
+        ]
+    end
   end
 
 
