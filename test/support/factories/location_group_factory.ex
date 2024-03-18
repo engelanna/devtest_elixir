@@ -3,10 +3,13 @@ defmodule Test.Support.Factories.LocationGroupFactory do
 
   alias DevtestElixir.Repo
   alias DevtestElixir.Schemas.LocationGroup
-  alias Faker.Nato
+  alias Ecto.Changeset
+
+  require Faker
 
   def create(opts \\ %{}) do
     changeset(opts)
+    |> Changeset.put_assoc(:locations, opts[:locations] || [])
     |> Repo.insert()
     |> elem(1)
   end
@@ -15,7 +18,7 @@ defmodule Test.Support.Factories.LocationGroupFactory do
     %LocationGroup{}
     |> LocationGroup.changeset(
       Map.merge(
-        %{name: Nato.letter_code_word()},
+        %{name: Faker.Nato.letter_code_word()},
         opts
       )
     )

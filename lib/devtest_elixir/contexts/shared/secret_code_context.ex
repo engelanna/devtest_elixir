@@ -10,9 +10,9 @@ defmodule DevtestElixir.Contexts.Shared.SecretCodeContext do
   Use from the Schema like this:
     def changeset(your_schema, attrs) do
       your_schema
-      |> cast(attrs, [:unrelated_attribute, :secret_code])
+      |> cast(attrs, [:_unrelated_attribute, :secret_code])
       |> put_secret_code_hash()
-      |> validate_required([:unrelated_attribute, :secret_code_hash, :secret_code_salt])
+      |> validate_required([:_unrelated_attribute, :secret_code_hash, :secret_code_salt])
     end
   """
 

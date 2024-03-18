@@ -8,7 +8,7 @@ defmodule PublicAPI.Router do
   end
 
   scope "/public_api" do
-    scope "/v1", PublicAPI.V1.Controllers do
+    scope "/v1", PublicAPI.V1.Controllers.JSON do
       pipe_through :v1
 
       resources "/locations", LocationController, only: [:show]

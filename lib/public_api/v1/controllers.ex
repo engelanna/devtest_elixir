@@ -1,11 +1,13 @@
 defmodule PublicAPI.V1.Controllers do
   @moduledoc false
 
-  def controller do
+
+  def json_controller do
     quote do
-      use Phoenix.Controller,
-        formats: [:json],
-        namespace: PublicAPI.V1.Controllers
+      use Phoenix.Controller
+
+      plug :put_view,
+        PublicAPI.V1.Views.dynamic_view_module_for_controller_name(__MODULE__)
 
       import Plug.Conn
 

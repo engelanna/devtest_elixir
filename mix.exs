@@ -24,7 +24,7 @@ defmodule DevtestElixir.MixProject do
   end
 
   # Specifies which paths to compile per environment.
-  defp elixirc_paths(:test), do: ["lib", "test/support", "test/private_api/support"]
+  defp elixirc_paths(:test), do: ["lib", "test/support", "test/private_api/support", "test/public_api/support"]
   defp elixirc_paths(_), do: ["lib"]
 
   # Specifies your project dependencies.
@@ -54,7 +54,8 @@ defmodule DevtestElixir.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.2"},
-      {:faker, "~> 0.18.0"}
+      {:faker, "~> 0.18.0", only: :test},
+      {:phoenix_view, "~> 2.0"}
     ]
   end
 

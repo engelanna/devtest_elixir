@@ -1,13 +1,19 @@
-defmodule DevtestElixir.PrivateAPI.V1.Views.JSON.LocationView do
- use DevtestElixir.PrivateAPI.V1, :view
+defmodule PrivateAPI.V1.Views.JSON.LocationView do
+  use PrivateAPI.V1.Views, :json_view
 
- def render("show.json", %{location: location}) do
+  def render("index.json", %{locations: locations}) do
+    Enum.map(locations, &display/1)
+  end
+
+  def render("show.json", %{location: location}) do
+    display(location)
+  end
+
+
+  defp display(location) do
     %{
-      id: location.id,
-      name: location.name,
-      country_id: location.country_id,
-      panel_provider_id: location.panel_provider_id,
-      # Include other fields as needed
+      external_id: location.external_id,
+      name: location.name
     }
- end
+  end
 end

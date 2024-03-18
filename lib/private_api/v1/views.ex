@@ -1,11 +1,11 @@
-defmodule PublicAPI.V1.Views do
+defmodule PrivateAPI.V1.Views do
   @moduledoc false
 
   def json_view do
     quote do
       use Phoenix.View,
-        root: "public_api/v1/templates/json",
-        namespace: PublicAPI.V1.Views.JSON
+        root: "private_api/v1/templates/json",
+        namespace: PrivateAPI.V1.Views.JSON
     end
   end
 

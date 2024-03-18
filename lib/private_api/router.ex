@@ -8,12 +8,12 @@ defmodule PrivateAPI.Router do
     plug PrivateAPI.V1.Plugs.VerifyToken
   end
 
-  scope "private_api" do
-    scope "v1", PrivateAPI.V1.Controllers do
+  scope "/private_api" do
+    scope "/v1", PrivateAPI.V1.Controllers.JSON do
       pipe_through :v1
 
-      get "locations/:country_code", LocationController, :locations_for_country_code, constraints: %{
-        country_code: ~r/[A-Z]{2}/
+      get "/locations/:country_code", LocationController, :locations_for_country_code, constraints: %{
+        country_code: ~r/[a-zA-Z]{2}/
       }
 
       # get "/target_groups/:country_code", TargetGroupController, :target_groups_for_country_code, constraints: %{

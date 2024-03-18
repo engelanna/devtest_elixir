@@ -3,10 +3,13 @@ defmodule Test.Support.Factories.LocationFactory do
 
   alias DevtestElixir.Repo
   alias DevtestElixir.Schemas.Location
-  alias Faker.Address
+  alias Ecto.Changeset
+
+  require Faker
 
   def create(opts \\ %{}) do
     changeset(opts)
+    |> Changeset.put_assoc(:location_groups, opts[:location_groups] || [])
     |> Repo.insert()
     |> elem(1)
   end
@@ -16,8 +19,8 @@ defmodule Test.Support.Factories.LocationFactory do
     |> Location.changeset(
       Map.merge(
         %{
-          name: Address.city(),
-          secret_code: "I'm invisible in your database"
+          name: Faker.Address.city(),
+          secret_code: Faker.String.base64()
         },
         opts
       )

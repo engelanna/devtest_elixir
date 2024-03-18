@@ -25,7 +25,11 @@ defmodule DevtestElixir.Schemas.Country do
     Repo.preload(country, :target_groups)
     |> cast(attrs, [:country_code, :panel_provider_id])
     |> validate_required([:country_code])
+    |> upcase_country_code()
     |> unique_constraint(:country_code)
     |> cast_assoc(:target_groups, with: &TargetGroup.changeset/2)
   end
+
+
+  defp upcase_country_code(changeset), do: update_change(changeset, :username, &String.upcase/1)
 end
