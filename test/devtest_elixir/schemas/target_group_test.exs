@@ -17,25 +17,28 @@ defmodule Test.DevtestElixir.Schemas.TargetGroupTest do
   end
 
 
-  test "allowing to insert a root (no parent_id) TargetGroup which has a Country associated",
-    %{root_target_group: root_target_group} do
+  describe "INSERTing a TargetGroup" do
+    test "when a root (no parent_id) TargetGroup has a Country associated",
+      %{root_target_group: root_target_group} do
 
-    assert {:ok, _} = Repo.update(root_target_group)
+      assert {:ok, _} = Repo.update(root_target_group)
+    end
   end
 
-  test "refusing to insert a nonroot (has parent_id) TargetGroup which has a Country associated",
-    %{nonroot_target_group: nonroot_target_group} do
+  describe "refusing to INSERT a TargetGroup" do
+    test "when a nonroot (has parent_id) TargetGroup has a Country associated",
+      %{nonroot_target_group: nonroot_target_group} do
 
-    assert {:error, changeset} = Repo.update(nonroot_target_group)
+      assert {:error, changeset} = Repo.update(nonroot_target_group)
 
-    assert changeset.errors == [
-      parent_id: {
-        "Only root TargetGroups (those without .parent_id) may be associated with Countries",
-        []
-      }
-    ]
+      assert changeset.errors == [
+        parent_id: {
+          "Only root TargetGroups (those without .parent_id) may be associated with Countries",
+          []
+        }
+      ]
+    end
   end
-
 
   defp target_group_changeset_with_country(target_group_struct) do
     new_country_map = Map.from_struct(CountryFactory.create())

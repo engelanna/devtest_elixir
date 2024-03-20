@@ -1,5 +1,4 @@
 defmodule Test.PrivateAPI.V1.Controllers.JSON.LocationController.LocationsForCountryCodeTest do
-  # TODO: Rename this controller test
   use Test.PrivateAPI.Support.ConnCase, async: true
 
   alias Test.Support.Factories.CountryFactory
@@ -7,10 +6,8 @@ defmodule Test.PrivateAPI.V1.Controllers.JSON.LocationController.LocationsForCou
   alias Test.Support.Factories.LocationGroupFactory
   alias Test.Support.Factories.PanelProviderFactory
 
-  require Jason
-
-  describe "locations/:country_code" do
-    test "responding to a country code with locations matching the country's panel provider", %{
+  describe "responding with Locations matching the Country's PanelProvider" do
+    test "when locations/:country_code called with a valid :country_code", %{
       conn: conn,
       country_code: country_code,
       expected_response: expected_response
