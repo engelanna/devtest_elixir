@@ -5,7 +5,6 @@ defmodule DevtestElixir.Schemas.Country do
 
   import Ecto.Changeset
 
-  alias DevtestElixir.Repo
   alias DevtestElixir.Schemas.LocationGroup
   alias DevtestElixir.Schemas.PanelProvider
   alias DevtestElixir.Schemas.TargetGroup
@@ -22,8 +21,7 @@ defmodule DevtestElixir.Schemas.Country do
   end
 
   def changeset(country, attrs) do
-    Repo.preload(country, :target_groups)
-    |> cast(attrs, [:country_code, :panel_provider_id])
+    cast(country, attrs, [:country_code, :panel_provider_id])
     |> validate_required([:country_code])
     |> upcase_country_code()
     |> unique_constraint(:country_code)
@@ -31,5 +29,7 @@ defmodule DevtestElixir.Schemas.Country do
   end
 
 
-  defp upcase_country_code(changeset), do: update_change(changeset, :username, &String.upcase/1)
+  defp upcase_country_code(changeset) do
+    update_change(changeset, :username, &String.upcase/1)
+  end
 end

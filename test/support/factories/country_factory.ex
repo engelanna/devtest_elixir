@@ -6,11 +6,12 @@ defmodule Test.Support.Factories.CountryFactory do
   alias DevtestElixir.Repo
   alias DevtestElixir.Schemas.Country
   alias Faker.Address
+  alias Ecto.Changeset
 
   def create(opts \\ %{}) do
     changeset(opts)
-    |> Repo.insert()
-    |> elem(1)
+    |> Changeset.put_assoc(:target_groups, opts[:target_groups] || [])
+    |> Repo.insert!()
   end
 
   def changeset(opts \\ %{}) do

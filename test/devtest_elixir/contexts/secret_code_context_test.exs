@@ -6,9 +6,7 @@ defmodule DevtestElixir.Contexts.Shared.SecretCodeContextTest do
   alias DevtestElixir.Schemas.Location
 
   setup do
-    {:ok, location} = create_location()
-
-    [location: location]
+    [location: create_location()]
   end
 
   test "computing the hash (from secret_code + salt) in a reproducible way", %{location: location} do
@@ -30,7 +28,7 @@ defmodule DevtestElixir.Contexts.Shared.SecretCodeContextTest do
         external_id: Ecto.UUID.generate(),
         secret_code: predefined_secret_code()
       })
-    |> Repo.insert()
+    |> Repo.insert!()
   end
 
   defp predefined_secret_code, do: "3nDFoMn31FRnc/Mo"

@@ -5,7 +5,6 @@ defmodule DevtestElixir.Schemas.PanelProvider do
 
   import Ecto.Changeset
 
-  @primary_key {:id, :id, autogenerate: true}
   schema "panel_providers" do
     field :pricing_strategy_code, :string
 

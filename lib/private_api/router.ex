@@ -16,9 +16,9 @@ defmodule PrivateAPI.Router do
         country_code: ~r/[a-zA-Z]{2}/
       }
 
-      # get "/target_groups/:country_code", TargetGroupController, :target_groups_for_country_code, constraints: %{
-      #   country_code: ~r/[A-Z]{2}/
-      # }
+      get "/target_groups/:country_code", TargetGroupController, :target_groups_for_country_code, constraints: %{
+        country_code: ~r/[a-zA-Z]{2}/
+      }
 
       # post "/evaluate_target", TargetController, :evaluate
     end

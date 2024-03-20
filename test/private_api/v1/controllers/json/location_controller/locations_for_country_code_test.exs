@@ -20,8 +20,8 @@ defmodule Test.PrivateAPI.V1.Controllers.JSON.LocationController.LocationsForCou
   end
 
   setup do
-    desired_panel_provider = Map.from_struct(PanelProviderFactory.create())
-    undesired_panel_provider = Map.from_struct(PanelProviderFactory.create())
+    desired_panel_provider = PanelProviderFactory.create()
+    undesired_panel_provider = PanelProviderFactory.create()
 
     poland = CountryFactory.create(%{country_code: "PL", panel_provider_id: desired_panel_provider.id})
     germany = CountryFactory.create(%{country_code: "DE", panel_provider_id: undesired_panel_provider.id})
@@ -42,14 +42,14 @@ defmodule Test.PrivateAPI.V1.Controllers.JSON.LocationController.LocationsForCou
       locations: [location_2_in_poland],
       name: "In Poland, but an undesired panel provider (we should NOT match these locations)",
       panel_provider_id: undesired_panel_provider.id
-    }).locations
+    })
 
     LocationGroupFactory.create(%{
       country_id: germany.id,
       locations: [location_3_in_germany],
       name: "In Germany (we should NOT match these locations), but having the desired panel provider",
       panel_provider_id: desired_panel_provider.id
-    }).locations
+    })
 
     [
       country_code: poland.country_code,

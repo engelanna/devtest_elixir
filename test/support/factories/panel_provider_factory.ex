@@ -7,8 +7,7 @@ defmodule Test.Support.Factories.PanelProviderFactory do
 
   def create(opts \\ %{}) do
     changeset(opts)
-    |> Repo.insert()
-    |> elem(1)
+    |> Repo.insert!()
   end
 
   def changeset(opts \\ %{}) do

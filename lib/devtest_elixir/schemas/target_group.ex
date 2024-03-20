@@ -6,7 +6,6 @@ defmodule DevtestElixir.Schemas.TargetGroup do
   import Ecto.Changeset
 
   alias DevtestElixir.Contexts.Shared.SecretCodeContext
-  alias DevtestElixir.Repo
   alias DevtestElixir.Schemas.Country
   alias DevtestElixir.Schemas.PanelProvider
 
@@ -28,25 +27,24 @@ defmodule DevtestElixir.Schemas.TargetGroup do
   end
 
   def changeset(target_group, attrs) do
-    Repo.preload(target_group, :countries)
-    |> cast(attrs, [:external_id, :parent_id, :name, :secret_code])
+    cast(target_group, attrs, [:external_id, :parent_id, :name, :secret_code, :panel_provider_id])
     |> SecretCodeContext.put_secret_code_hash_and_salt()
     |> validate_required([:external_id, :name, :secret_code_hash, :secret_code_salt])
     |> cast_assoc(:countries, with: &Country.changeset/2)
     |> validate_being_root_for_country_association(attrs)
   end
 
+
   defp validate_being_root_for_country_association(changeset, attrs) do
     are_countries_involved = Map.get(attrs, :countries) != nil
     is_parent_id_present = get_field(changeset, :parent_id)
 
-    validation_passed = !!(are_countries_involved && is_parent_id_present)
+    validation_passed = !(are_countries_involved && is_parent_id_present)
 
     case validation_passed do
-      true -> add_error(changeset, :parent_id,
+      false -> add_error(changeset, :parent_id,
         "Only root TargetGroups (those without .parent_id) may be associated with Countries")
-
-      false -> changeset
+      true -> changeset
     end
   end
 end

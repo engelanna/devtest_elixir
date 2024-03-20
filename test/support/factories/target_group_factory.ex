@@ -3,11 +3,12 @@ defmodule Test.Support.Factories.TargetGroupFactory do
 
   alias DevtestElixir.Repo
   alias DevtestElixir.Schemas.TargetGroup
+  alias Ecto.Changeset
 
   def create(opts \\ %{}) do
     changeset(opts)
-    |> Repo.insert()
-    |> elem(1)
+    |> Changeset.put_assoc(:countries, opts[:countries] || [])
+    |> Repo.insert!()
   end
 
   def changeset(opts \\ %{}) do
@@ -19,7 +20,7 @@ defmodule Test.Support.Factories.TargetGroupFactory do
           name: "does not matter",
           secret_code: "does not matter"
         },
-        opts
+        Map.delete(opts, :countries)
     ))
   end
 end

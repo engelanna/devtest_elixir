@@ -10,8 +10,7 @@ defmodule Test.Support.Factories.LocationGroupFactory do
   def create(opts \\ %{}) do
     changeset(opts)
     |> Changeset.put_assoc(:locations, opts[:locations] || [])
-    |> Repo.insert()
-    |> elem(1)
+    |> Repo.insert!()
   end
 
   def changeset(opts \\ %{}) do
