@@ -32,7 +32,7 @@ defmodule DevtestElixir.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.7.11"},
+      {:phoenix, "~> 1.7.11"}, # TODO: Can import order be alphabetical?
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.10"},
       {:postgrex, ">= 0.0.0"},
@@ -55,7 +55,10 @@ defmodule DevtestElixir.MixProject do
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.2"},
       {:faker, "~> 0.18.0", only: :test},
-      {:phoenix_view, "~> 2.0"}
+      {:phoenix_view, "~> 2.0"},
+      {:httpoison, "~> 2.0"},
+      {:floki, "~> 0.36.0"},
+      {:mimic, "~> 1.7", only: :test}
     ]
   end
 

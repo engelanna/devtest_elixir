@@ -20,7 +20,7 @@ defmodule PrivateAPI.Router do
         country_code: ~r/[a-zA-Z]{2}/
       }
 
-      # post "/evaluate_target", TargetController, :evaluate
+      post "/evaluate_target", TargetController, :evaluate_target
     end
 
     # Enable LiveDashboard and Swoosh mailbox preview in development

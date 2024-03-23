@@ -1,9 +1,23 @@
 defmodule DevtestElixir.Contexts.PanelProviderContext do
   @moduledoc false
 
+  import Ecto.Query
+
+  alias DevtestElixir.Contexts.CountryContext
+  alias DevtestElixir.Repo
   alias DevtestElixir.Schemas.PanelProvider
 
   def random_pricing_strategy_code do
     Enum.random(PanelProvider.allowed_pricing_strategy_codes)
+  end
+
+  def price_from_country_code(country_code) do
+    with country <- CountryContext.from_country_code_with_panel_provider(country_code),
+         panel_provider <- country.panel_provider,
+         pricing_strategy_code <- panel_provider.pricing_strategy_code,
+         pricing_module_name <- DevtestElixir.PricingStrategies.pricing_strategy_module(pricing_strategy_code)
+    do
+      pricing_module_name.call()
+    end
   end
 end
