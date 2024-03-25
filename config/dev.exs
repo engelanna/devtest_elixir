@@ -29,6 +29,19 @@ config :devtest_elixir, PrivateAPI.Endpoint,
     tailwind: {Tailwind, :install_and_run, [:devtest_elixir, ~w(--watch)]}
   ]
 
+config :devtest_elixir, PublicAPI.Endpoint,
+  # Binding to loopback ipv4 address prevents access from other machines.
+  # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
+  http: [ip: {127, 0, 0, 1}, port: 4001],
+  check_origin: false,
+  code_reloader: true,
+  debug_errors: true,
+  secret_key_base: "pk3G9zIJPjcvQSiK9t8YxcNj9lk7Q2DoGO/zlHmf1YZqZ+/RDGdcnPFdQND61kE4",
+  watchers: [
+    esbuild: {Esbuild, :install_and_run, [:devtest_elixir, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:devtest_elixir, ~w(--watch)]}
+  ]
+
 # ## SSL Support
 #
 # In order to use HTTPS in development, a self-signed

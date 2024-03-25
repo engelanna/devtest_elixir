@@ -11,9 +11,8 @@ config :devtest_elixir,
   ecto_repos: [DevtestElixir.Repo],
   generators: [timestamp_type: :utc_datetime, binary_id: true]
 
-config :devtest_elixir, namespace: PrivateAPI # TODO: Remove once PrivateAPI's application.ex has been set up
 config :devtest_elixir, PrivateAPI.Endpoint,
-  api_token: "IIxyXkKDsCiLZvQ8nLwKKeg1TbrgUzZRUTEs7PsKbaf+gfPv/8OXtp8YE86Oa/d7", # TODO: Move to PrivateAPI namespace once namespace has been set up
+  api_token: "IIxyXkKDsCiLZvQ8nLwKKeg1TbrgUzZRUTEs7PsKbaf+gfPv/8OXtp8YE86Oa/d7",
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [
@@ -22,6 +21,18 @@ config :devtest_elixir, PrivateAPI.Endpoint,
   ],
   pubsub_server: DevtestElixir.PubSub,
   live_view: [signing_salt: "Fprovi3Q"]
+
+config :devtest_elixir, PublicAPI.Endpoint,
+  api_token: "IIxyXkKDsCiLZvQ8nLwKKeg1TbrgUzZRUTEs7PsKbaf+gfPv/8OXtp8YE86Oa/d7",
+  url: [host: "localhost"],
+  adapter: Bandit.PhoenixAdapter,
+  render_errors: [
+    formats: [json: PublicAPI.V1.Views.JSON.ErrorView],
+    layout: false
+  ],
+  pubsub_server: DevtestElixir.PubSub,
+  live_view: [signing_salt: "uhPB4G9A"]
+
 
 # Configures the mailer
 #

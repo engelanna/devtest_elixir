@@ -17,7 +17,8 @@ defmodule DevtestElixir.Application do
       # Start a worker by calling: DevtestElixir.Worker.start_link(arg)
       # {DevtestElixir.Worker, arg},
       # Start to serve requests, typically the last entry
-      PrivateAPI.Endpoint
+      PrivateAPI.Endpoint,
+      PublicAPI.Endpoint
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

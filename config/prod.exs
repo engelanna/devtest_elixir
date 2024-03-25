@@ -8,6 +8,9 @@ import Config
 config :devtest_elixir, PrivateAPI.Endpoint,
   cache_static_manifest: "priv/static/cache_manifest.json"
 
+config :devtest_elixir, PublicAPI.Endpoint,
+  cache_static_manifest: "priv/static/cache_manifest.json"
+
 # Configures Swoosh API Client
 config :swoosh, api_client: Swoosh.ApiClient.Finch, finch_name: DevtestElixir.Finch
 
