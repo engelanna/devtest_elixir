@@ -1,4 +1,4 @@
-defmodule PrivateAPI.V1.Plugs.VerifyToken do
+defmodule PublicAPI.V1.Plugs.VerifyToken do
   @moduledoc """
   In order to pass this verification, a request has to have its "authorization" header set to:
     bearer Application.get_env(:private_api, :api_token)
@@ -24,6 +24,6 @@ defmodule PrivateAPI.V1.Plugs.VerifyToken do
 
   defp stored_api_token_matched(received_api_token) do
     received_api_token == \
-      Application.get_env(:devtest_elixir, PrivateAPI.Endpoint)[:api_token] # TODO: Change to private_api once no errors thrown anymore
+      Application.get_env(:devtest_elixir, PublicAPI.Endpoint)[:api_token]
   end
 end

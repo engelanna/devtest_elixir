@@ -5,7 +5,6 @@ defmodule PrivateAPI.Router do
 
   pipeline :v1 do
     plug :accepts, ["json"]
-    plug PrivateAPI.V1.Plugs.VerifyToken
   end
 
   scope "/private_api" do

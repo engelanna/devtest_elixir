@@ -1,10 +1,7 @@
 defmodule DevtestElixir.Contexts.PanelProviderContext do
   @moduledoc false
 
-  import Ecto.Query
-
   alias DevtestElixir.Contexts.CountryContext
-  alias DevtestElixir.Repo
   alias DevtestElixir.Schemas.PanelProvider
 
   def random_pricing_strategy_code do

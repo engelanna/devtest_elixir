@@ -5,17 +5,20 @@ defmodule PublicAPI.Router do
 
   pipeline :v1 do
     plug :accepts, ["json"]
+    plug PublicAPI.V1.Plugs.VerifyToken
   end
 
   scope "/public_api" do
     scope "/v1", PublicAPI.V1.Controllers.JSON do
       pipe_through :v1
 
-      resources "/locations", LocationController, only: [:show]
+      get "/locations/:country_code", LocationController, :locations_for_country_code, constraints: %{
+        country_code: ~r/[a-zA-Z]{2}/
+      }
 
-      scope "/target_groups" do
-        get "/:id/:country_code", TargetGroupController, :show
-      end
+      get "/target_groups/:country_code", TargetGroupController, :target_groups_for_country_code, constraints: %{
+        country_code: ~r/[a-zA-Z]{2}/
+      }
     end
 
     # Enable LiveDashboard and Swoosh mailbox preview in development

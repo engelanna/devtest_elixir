@@ -1,5 +1,5 @@
-defmodule PrivateAPI.V1.Views.JSON.ErrorView do
-  use PrivateAPI.V1.Views, :json_view
+defmodule PublicAPI.V1.Views.JSON.ErrorView do
+  use PublicAPI.V1.Views, :json_view
 
   def render("400.json", _assigns) do
     %{error: "Bad Request"}

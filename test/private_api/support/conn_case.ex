@@ -11,28 +11,11 @@ defmodule Test.PrivateAPI.Support.ConnCase do
   we enable the SQL sandbox, so changes done to the database
   are reverted at the end of every test. If you are using
   PostgreSQL, you can even run database tests asynchronously
-  by setting `use Test.PrivateAPI.Support.ConnCase, async: true`, although
+  by setting `use PrivateAPI.ConnCase, async: true`, although
   this option is not recommended for other databases.
   """
 
   use ExUnit.CaseTemplate
-
-  setup tags do
-    Test.Support.DataCase.setup_sandbox(tags)
-    {:ok, conn: Phoenix.ConnTest.build_conn()}
-  end
-
-      import Plug.Conn
-
-  setup %{conn: conn} do
-    {:ok,
-    conn: put_req_header(conn, "accept", "application/json")
-       |> put_req_header(
-          "authorization", "bearer " <> Application.get_env(
-            :devtest_elixir, PrivateAPI.Endpoint
-          )[:api_token]
-        )}
-  end
 
   using do
     quote do
@@ -46,5 +29,10 @@ defmodule Test.PrivateAPI.Support.ConnCase do
       import Phoenix.ConnTest
       import Test.PrivateAPI.Support.ConnCase
     end
+  end
+
+  setup tags do
+    Test.Support.DataCase.setup_sandbox(tags)
+    {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 end
