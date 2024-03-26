@@ -27,7 +27,9 @@ defmodule Test.PrivateAPI.V1.Controllers.JSON.TargetController.EvaluateTargetTes
       post_params: %{
         country_code: czech_republic.country_code,
         target_group_id: Ecto.UUID.generate(),
-        locations: []
+        locations: [
+          %{id: Ecto.UUID.generate(), panel_size: -1}
+        ]
       },
       expected_response: %{"price" => 237}
     ]
