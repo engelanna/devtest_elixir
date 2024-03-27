@@ -8,15 +8,13 @@ defmodule DevtestElixir.PricingStrategies.CountHtmlNodesAtUrlThenDivide do
     divide_price_by \\ 100
   ) do
 
-    with {:ok, %HTTPoison.Response{status_code: 200, body: body}} <- get(url),
-         price <- count_html_nodes(body) / divide_price_by
-    do
-      price
+    with {:ok, %HTTPoison.Response{status_code: 200, body: body}} <- get(url) do
+     _price = count_html_nodes(body) / divide_price_by
     end
   end
 
 
-  def count_html_nodes(html) do
+  defp count_html_nodes(html) do
     html
     |> Floki.find("*")
     |> length()

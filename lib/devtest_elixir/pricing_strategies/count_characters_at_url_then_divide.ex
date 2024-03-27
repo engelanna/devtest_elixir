@@ -11,10 +11,9 @@ defmodule DevtestElixir.PricingStrategies.CountCharactersAtUrlThenDivide do
     with {:ok, %{status_code: 200, body: body}} <- get(url),
          character_count <- String.graphemes(body)
                             |> Enum.frequencies()
-                            |> then(& &1[desired_character]),
-        price <- character_count / divide_price_by
+                            |> then(& &1[desired_character])
     do
-      price
+      _price = character_count / divide_price_by
     end
   end
 end

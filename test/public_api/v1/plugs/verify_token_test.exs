@@ -11,8 +11,8 @@ defmodule Test.PublicAPI.V1.Plugs.VerifyTokenTest do
       conn: conn(:get, "/"),
       tokens: %{
         correct: Application.get_env(:devtest_elixir, PrivateAPI.Endpoint)[:api_token],
-        wrong: "This token isn't going to cut it.",
-        missing: nil
+        missing: nil,
+        wrong: "This token isn't going to cut it."
       }
     }
   end
@@ -31,20 +31,20 @@ defmodule Test.PublicAPI.V1.Plugs.VerifyTokenTest do
   end
 
   describe "halting the connection" do
-    test "when API token wrong", %{conn: conn, tokens: %{wrong: wrong_token}} do
+    test "when API token missing", %{conn: conn, tokens: %{missing: no_token}} do
       refute conn.status == :unauthorized
 
-      conn = conn |> put_req_header("authorization", "bearer #{wrong_token}")
+      conn = conn |> put_req_header("authorization", "bearer #{no_token}")
                   |> VerifyToken.call([])
 
       assert conn.status == code(:unauthorized)
       assert conn.halted
     end
 
-    test "when API token missing", %{conn: conn, tokens: %{missing: no_token}} do
+    test "when API token wrong", %{conn: conn, tokens: %{wrong: wrong_token}} do
       refute conn.status == :unauthorized
 
-      conn = conn |> put_req_header("authorization", "bearer #{no_token}")
+      conn = conn |> put_req_header("authorization", "bearer #{wrong_token}")
                   |> VerifyToken.call([])
 
       assert conn.status == code(:unauthorized)

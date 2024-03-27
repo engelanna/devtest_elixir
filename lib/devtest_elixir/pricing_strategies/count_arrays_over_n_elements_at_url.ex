@@ -8,10 +8,9 @@ defmodule DevtestElixir.PricingStrategies.CountArraysOverNElementsAtUrl do
     min_array_length \\ 10
   ) do
     with {:ok, %HTTPoison.Response{status_code: 200, body: body}} <- get(url),
-         json_object <- Jason.decode!(body),
-         price <- count_arrays(json_object, min_array_length)
+         json_object <- Jason.decode!(body)
     do
-      price
+      _price = count_arrays(json_object, min_array_length)
     end
   end
 

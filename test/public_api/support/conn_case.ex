@@ -22,7 +22,7 @@ defmodule Test.PublicAPI.Support.ConnCase do
     {:ok, conn: Phoenix.ConnTest.build_conn()}
   end
 
-      import Plug.Conn
+  import Plug.Conn
 
   setup %{conn: conn} do
     {:ok,

@@ -58,7 +58,8 @@ defmodule DevtestElixir.MixProject do
       {:phoenix_view, "~> 2.0"},
       {:httpoison, "~> 2.0"},
       {:floki, "~> 0.36.0"},
-      {:mimic, "~> 1.7", only: :test}
+      {:mimic, "~> 1.7", only: :test},
+      {:exvcr, "~> 0.11", only: :test}
     ]
   end
 
