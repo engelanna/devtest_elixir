@@ -22,6 +22,7 @@ defmodule PublicAPI.V1.Plugs.VerifyToken do
     end
   end
 
+
   defp stored_api_token_matched(received_api_token) do
     received_api_token == \
       Application.get_env(:devtest_elixir, PublicAPI.Endpoint)[:api_token]

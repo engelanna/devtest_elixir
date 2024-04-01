@@ -10,7 +10,7 @@ defmodule Test.PublicAPI.V1.Plugs.VerifyTokenTest do
     {:ok,
       conn: conn(:get, "/"),
       tokens: %{
-        correct: Application.get_env(:devtest_elixir, PrivateAPI.Endpoint)[:api_token],
+        correct: Application.get_env(:devtest_elixir, PublicAPI.Endpoint)[:api_token],
         missing: nil,
         wrong: "This token isn't going to cut it."
       }

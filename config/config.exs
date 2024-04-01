@@ -12,7 +12,6 @@ config :devtest_elixir,
   generators: [timestamp_type: :utc_datetime, binary_id: true]
 
 config :devtest_elixir, PrivateAPI.Endpoint,
-  api_token: "IIxyXkKDsCiLZvQ8nLwKKeg1TbrgUzZRUTEs7PsKbaf+gfPv/8OXtp8YE86Oa/d7",
   url: [host: "localhost"],
   adapter: Bandit.PhoenixAdapter,
   render_errors: [

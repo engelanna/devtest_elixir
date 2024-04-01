@@ -9,6 +9,7 @@ defmodule DevtestElixir.Application do
   def start(_type, _args) do
     children = [
       PrivateAPI.Telemetry,
+      PublicAPI.Telemetry,
       DevtestElixir.Repo,
       {DNSCluster, query: Application.get_env(:devtest_elixir, :dns_cluster_query) || :ignore},
       {Phoenix.PubSub, name: DevtestElixir.PubSub},
