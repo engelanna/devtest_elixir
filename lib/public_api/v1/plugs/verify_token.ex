@@ -1,7 +1,7 @@
 defmodule PublicAPI.V1.Plugs.VerifyToken do
   @moduledoc """
   In order to pass this verification, a request has to have its "authorization" header set to:
-    bearer Application.get_env(:private_api, :api_token)
+    bearer Application.get_env(:devtest_elixir, PublicAPI.Endpoint)[:api_token]
   """
   import Plug.Conn
 
