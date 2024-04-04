@@ -16,7 +16,7 @@ Degree of isolation |||||
 ---
 
 ###### Test-Driven Development
-- the [test suite](https://i.ibb.co/3fHJW8p/devtest-elixir-test-suite-screenshot.png) at a glance (`ExUnit`, `Mimic` [mocks](https://github.com/engelanna/devtest_elixir/blob/master/test/private_api/v1/controllers/json/target_controller/evaluate_target_test.exs#L21))
+- the [test suite](https://i.ibb.co/R2VLBfy/devtest-elixir-test-suite-screenshot.png) at a glance (`ExUnit`, `Mimic` [mocks](https://github.com/engelanna/devtest_elixir/blob/master/test/private_api/v1/controllers/json/target_controller/evaluate_target_test.exs#L21))
   - [hand-rolled factories](https://github.com/engelanna/devtest_elixir/blob/master/test/support/factories/location_group_factory.ex#L10) to see what they'd have to look like (next time: `ExMachina`)
   - 3 scrapers involved: [tested](https://github.com/engelanna/devtest_elixir/blob/master/test/devtest_elixir/pricing_strategies/count_html_nodes_at_url_then_divide_test.exs) with `ExVCR` using a custom [CassetteCase](https://github.com/engelanna/devtest_elixir/blob/master/test/support/cassette_case.ex)
 - de facto 100% test coverage, as [controller tests](https://github.com/engelanna/devtest_elixir/blob/master/test/public_api/v1/controllers/json/target_group_controller/target_groups_for_country_code_test.exs#L9) double as integration -//-
