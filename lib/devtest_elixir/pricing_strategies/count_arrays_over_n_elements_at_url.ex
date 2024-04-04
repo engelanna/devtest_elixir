@@ -16,18 +16,18 @@ defmodule DevtestElixir.PricingStrategies.CountArraysOverNElementsAtUrl do
 
 
   defp count_arrays(input, min_array_length) do
-    input = convert_to_list_if_map(input)
+    input_list = convert_to_list_if_map(input)
 
-    Enum.reduce(input, 0,
-      fn input_element, count_so_far ->
-        is_an_interesting_list = is_list(input_element) && length(input_element) >= min_array_length
+    Enum.reduce(input_list, 0,
+      fn list_element, count_so_far ->
+        is_an_interesting_list = is_list(list_element) && length(list_element) >= min_array_length
 
         cond do
           is_an_interesting_list ->
-            count_so_far + count_arrays(input_element, min_array_length) + 1
+            count_so_far + count_arrays(list_element, min_array_length) + 1
 
-          is_list(input_element) || is_map(input_element) ->
-            count_so_far + count_arrays(input_element, min_array_length)
+          is_list(list_element) || is_map(list_element) ->
+            count_so_far + count_arrays(list_element, min_array_length)
 
           true -> count_so_far
         end
