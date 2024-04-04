@@ -1,4 +1,4 @@
-defmodule Test.PricingStrategies.CountCharactersAtUrlThenDivideTest do
+defmodule Test.DevtestElixir.PricingStrategies.CountCharactersAtUrlThenDivideTest do
   use Test.Support.CassetteCase, async: true
 
   alias DevtestElixir.PricingStrategies.CountCharactersAtUrlThenDivide

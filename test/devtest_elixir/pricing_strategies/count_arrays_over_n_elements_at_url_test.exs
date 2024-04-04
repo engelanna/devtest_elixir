@@ -1,4 +1,4 @@
-defmodule Test.PricingStrategies.CountArraysOverNElementsAtUrlTest do
+defmodule Test.DevtestElixir.PricingStrategies.CountArraysOverNElementsAtUrlTest do
   use Test.Support.CassetteCase, async: true
 
   alias DevtestElixir.PricingStrategies.CountArraysOverNElementsAtUrl

@@ -1,4 +1,4 @@
-defmodule Test.PricingStrategies.CountHtmlNodesAtUrlThenDivideTest do
+defmodule Test.DevtestElixir.PricingStrategies.CountHtmlNodesAtUrlThenDivideTest do
   use Test.Support.CassetteCase, async: true
 
   alias DevtestElixir.PricingStrategies.CountHtmlNodesAtUrlThenDivide
