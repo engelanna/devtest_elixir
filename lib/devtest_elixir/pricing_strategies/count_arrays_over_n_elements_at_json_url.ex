@@ -1,4 +1,4 @@
-defmodule DevtestElixir.PricingStrategies.CountArraysOverNElementsAtUrl do
+defmodule DevtestElixir.PricingStrategies.CountArraysOverNElementsAtJsonUrl do
   @moduledoc false
 
   use HTTPoison.Base
@@ -15,19 +15,19 @@ defmodule DevtestElixir.PricingStrategies.CountArraysOverNElementsAtUrl do
   end
 
 
-  defp count_arrays(input, min_array_length) do
-    input_list = convert_to_list_if_map(input)
+  defp count_arrays(input_json, min_array_length) do
+    input_as_list = convert_to_list_if_map(input_json)
 
-    Enum.reduce(input_list, 0,
-      fn list_element, count_so_far ->
-        is_an_interesting_list = is_list(list_element) && length(list_element) >= min_array_length
+    Enum.reduce(input_as_list, 0,
+      fn input_list_element, count_so_far ->
+        is_an_interesting_list = is_list(input_list_element) && length(input_list_element) >= min_array_length
 
         cond do
           is_an_interesting_list ->
-            count_so_far + count_arrays(list_element, min_array_length) + 1
+            count_so_far + count_arrays(input_list_element, min_array_length) + 1
 
-          is_list(list_element) || is_map(list_element) ->
-            count_so_far + count_arrays(list_element, min_array_length)
+          is_list(input_list_element) || is_map(input_list_element) ->
+            count_so_far + count_arrays(input_list_element, min_array_length)
 
           true -> count_so_far
         end
