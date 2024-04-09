@@ -21,7 +21,7 @@ defmodule DevtestElixir.Schemas.PanelProvider do
   def allowed_pricing_strategy_codes do
     ~w/
       count_characters_at_url_then_divide
-      count_arrays_over_n_elements_at_url
+      count_arrays_over_n_elements_at_json_url
       count_html_nodes_at_url_then_divide
     /
   end

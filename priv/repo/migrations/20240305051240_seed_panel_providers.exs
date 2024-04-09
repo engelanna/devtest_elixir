@@ -49,7 +49,7 @@ defmodule DevtestElixir.Repo.Migrations.SeedPanelProviders do
       },
       %{
         id: 2,
-        pricing_strategy_code: "count_arrays_over_n_elements_at_url",
+        pricing_strategy_code: "count_arrays_over_n_elements_at_json_url",
         inserted_at: timestamp,
         updated_at: timestamp
       },
