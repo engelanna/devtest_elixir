@@ -6,9 +6,23 @@ import Config
 # which you should run after static files are built and
 # before starting your production server.
 config :devtest_elixir, PrivateAPI.Endpoint,
+  # Binding to loopback ipv4 address prevents access from other machines.
+  # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
+  http: [ip: {127, 0, 0, 1}, port: 4000],
+  check_origin: false,
+  code_reloader: true,
+  debug_errors: true,
+  secret_key_base: "ICgSb5L98l2/qm5ZrUdTwKshei8v6mmryantl+YNGqQoOAfvM4bwkn7udDkdC+gW",
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 config :devtest_elixir, PublicAPI.Endpoint,
+  # Binding to loopback ipv4 address prevents access from other machines.
+  # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
+  http: [ip: {127, 0, 0, 1}, port: 4001],
+  check_origin: false,
+  code_reloader: true,
+  debug_errors: true,
+  secret_key_base: "pk3G9zIJPjcvQSiK9t8YxcNj9lk7Q2DoGO/zlHmf1YZqZ+/RDGdcnPFdQND61kE4",
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Configures Swoosh API Client
