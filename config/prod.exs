@@ -13,8 +13,6 @@ config :devtest_elixir, PrivateAPI.Endpoint,
   code_reloader: true,
   debug_errors: true,
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  http: [ip: {127, 0, 0, 1}, port: 4000],
-  port: 4000,
   secret_key_base: "OJnXxkR6BdPncB5j/LKT6HCCj+Meh/ylNuEaxRnPtJBV0xZJAhiMu9/luvgZ8xpD/",
   server: true
 
@@ -25,9 +23,7 @@ config :devtest_elixir, PublicAPI.Endpoint,
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  http: [ip: {127, 0, 0, 1}, port: 4001],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  port: 4001,
   secret_key_base: "V6xlaIK77mj430HkskijK3juoD6bmhhOHFkHVyT9onyUh2nmP9OuziZqg597GHU",
   server: true
 
