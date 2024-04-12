@@ -14,7 +14,9 @@ config :devtest_elixir, PrivateAPI.Endpoint,
   debug_errors: true,
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   http: [ip: {127, 0, 0, 1}, port: 4000],
-  secret_key_base: "OJnXxkR6BdPncB5j/LKT6HCCj+Meh/ylNuEaxRnPtJBV0xZJAhiMu9/luvgZ8xpD/"
+  port: 4000,
+  secret_key_base: "OJnXxkR6BdPncB5j/LKT6HCCj+Meh/ylNuEaxRnPtJBV0xZJAhiMu9/luvgZ8xpD/",
+  server: true
 
 config :devtest_elixir, PublicAPI.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
@@ -25,7 +27,9 @@ config :devtest_elixir, PublicAPI.Endpoint,
   debug_errors: true,
   http: [ip: {127, 0, 0, 1}, port: 4001],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
-  secret_key_base: "V6xlaIK77mj430HkskijK3juoD6bmhhOHFkHVyT9onyUh2nmP9OuziZqg597GHU"
+  port: 4001,
+  secret_key_base: "V6xlaIK77mj430HkskijK3juoD6bmhhOHFkHVyT9onyUh2nmP9OuziZqg597GHU",
+  server: true
 
 # Configures Swoosh API Client
 config :swoosh, api_client: Swoosh.ApiClient.Finch, finch_name: DevtestElixir.Finch
