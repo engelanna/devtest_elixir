@@ -8,22 +8,24 @@ import Config
 config :devtest_elixir, PrivateAPI.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {127, 0, 0, 1}, port: 4000],
+  cache_static_manifest: "priv/static/cache_manifest.json",
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "ICgSb5L98l2/qm5ZrUdTwKshei8v6mmryantl+YNGqQoOAfvM4bwkn7udDkdC+gW",
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  http: [ip: {127, 0, 0, 1}, port: 4000],
+  secret_key_base: "OJnXxkR6BdPncB5j/LKT6HCCj+Meh/ylNuEaxRnPtJBV0xZJAhiMu9/luvgZ8xpD/"
 
 config :devtest_elixir, PublicAPI.Endpoint,
   # Binding to loopback ipv4 address prevents access from other machines.
   # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {127, 0, 0, 1}, port: 4001],
+  cache_static_manifest: "priv/static/cache_manifest.json",
   check_origin: false,
   code_reloader: true,
   debug_errors: true,
-  secret_key_base: "pk3G9zIJPjcvQSiK9t8YxcNj9lk7Q2DoGO/zlHmf1YZqZ+/RDGdcnPFdQND61kE4",
-  cache_static_manifest: "priv/static/cache_manifest.json"
+  http: [ip: {127, 0, 0, 1}, port: 4001],
+  force_ssl: [rewrite_on: [:x_forwarded_proto]],
+  secret_key_base: "V6xlaIK77mj430HkskijK3juoD6bmhhOHFkHVyT9onyUh2nmP9OuziZqg597GHU"
 
 # Configures Swoosh API Client
 config :swoosh, api_client: Swoosh.ApiClient.Finch, finch_name: DevtestElixir.Finch
