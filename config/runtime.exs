@@ -54,7 +54,7 @@ if config_env() == :prod do
   config :devtest_elixir, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
   config :devtest_elixir, PrivateAPI.Endpoint,
-    url: [host: host, port: 443, scheme: "https"],
+    # url: [host: host, port: 443, scheme: "https"],
     http: [
       # Enable IPv6 and bind on all interfaces.
       # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
@@ -66,7 +66,7 @@ if config_env() == :prod do
     secret_key_base: secret_key_base
 
   config :devtest_elixir, PublicAPI.Endpoint,
-    url: [host: host, port: 444, scheme: "https"],
+    # url: [host: host, port: 444, scheme: "https"],
     http: [
       # Enable IPv6 and bind on all interfaces.
       # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
