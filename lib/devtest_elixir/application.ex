@@ -33,6 +33,7 @@ defmodule DevtestElixir.Application do
   @impl true
   def config_change(changed, _new, removed) do
     PrivateAPI.Endpoint.config_change(changed, removed)
+    PublicAPI.Endpoint.config_change(changed, removed)
     :ok
   end
 end
