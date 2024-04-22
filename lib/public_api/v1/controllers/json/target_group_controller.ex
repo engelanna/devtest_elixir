@@ -11,5 +11,4 @@ defmodule PublicAPI.V1.Controllers.JSON.TargetGroupController do
 
     render(conn, :index, %{target_groups: matched_target_groups})
   end
-
 end

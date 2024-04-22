@@ -10,5 +10,4 @@ defmodule PublicAPI.V1.Controllers.JSON.LocationController do
 
     render(conn, :index, locations: matched_locations)
   end
-
 end

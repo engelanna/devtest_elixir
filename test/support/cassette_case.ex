@@ -18,6 +18,7 @@ defmodule Test.Support.CassetteCase do
   setup do
     HTTPoison.start()
     ExVCR.Config.cassette_library_dir(@cassettes_dir)
+
     :ok
   end
 end

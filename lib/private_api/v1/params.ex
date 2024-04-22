@@ -4,6 +4,7 @@ defmodule PrivateAPI.V1.Params do
   def params do
     quote do
       use Ecto.Schema
+
       import Ecto.Changeset
 
       @primary_key false

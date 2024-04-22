@@ -6,10 +6,10 @@ defmodule PrivateAPI.V1.Controllers do
     quote do
       use Phoenix.Controller
 
+      import Plug.Conn
+
       plug :put_view,
         PrivateAPI.V1.Views.dynamic_view_module_for_controller_name(__MODULE__)
-
-      import Plug.Conn
 
       unquote(PrivateAPI.verified_routes())
     end
