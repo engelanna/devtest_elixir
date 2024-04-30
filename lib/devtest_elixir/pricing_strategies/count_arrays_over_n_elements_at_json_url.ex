@@ -15,10 +15,8 @@ defmodule DevtestElixir.PricingStrategies.CountArraysOverNElementsAtJsonUrl do
   end
 
 
-  defp count_arrays(input_json, min_array_length) do
-    input_as_list = convert_to_list_if_map(input_json)
-
-    Enum.reduce(input_as_list, 0,
+  defp count_arrays(input_json, min_array_length) when is_list(input_json) do
+    Enum.reduce(input_json, 0,
       fn input_list_element, count_so_far ->
         is_an_interesting_list = is_list(input_list_element) && length(input_list_element) >= min_array_length
 
@@ -35,11 +33,10 @@ defmodule DevtestElixir.PricingStrategies.CountArraysOverNElementsAtJsonUrl do
     )
   end
 
-  defp convert_to_list_if_map(potential_map) do
-    if is_map(potential_map) do
-      Map.values(potential_map)
-    else
-      potential_map
-    end
+  defp count_arrays(input_json, min_array_length) when is_map(input_json) do
+    count_arrays(
+      Map.values(input_json),
+      min_array_length
+    )
   end
 end
