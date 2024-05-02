@@ -5,7 +5,7 @@ defmodule DevtestElixir.Schemas.TargetGroup do
 
   import Ecto.Changeset
 
-  alias DevtestElixir.Contexts.Shared.SecretCodeContext
+  alias DevtestElixir.Mixins.SecretCodeContext
   alias DevtestElixir.Schemas.Country
   alias DevtestElixir.Schemas.PanelProvider
 

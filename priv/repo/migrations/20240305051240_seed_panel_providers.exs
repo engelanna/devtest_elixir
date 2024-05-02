@@ -3,7 +3,7 @@ defmodule DevtestElixir.Repo.Migrations.SeedPanelProviders do
 
   import Ecto.Query, only: [from: 2]
 
-  alias DevtestElixir.Contexts.Shared.UTCTimestampNoMicroseconds
+  alias DevtestElixir.Mixins.UTCTimestampNoMicroseconds
   alias DevtestElixir.Repo
   alias DevtestElixir.Schemas.PanelProvider
 

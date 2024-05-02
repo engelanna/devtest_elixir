@@ -4,7 +4,7 @@ defmodule DevtestElixir.Schemas.Location do
   use Ecto.Schema
 
   import Ecto.Changeset
-  import DevtestElixir.Contexts.Shared.SecretCodeContext
+  import DevtestElixir.Mixins.SecretCodeContext
 
   alias DevtestElixir.Schemas.LocationGroup
 
