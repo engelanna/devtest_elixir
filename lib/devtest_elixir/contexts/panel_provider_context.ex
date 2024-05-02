@@ -12,7 +12,7 @@ defmodule DevtestElixir.Contexts.PanelProviderContext do
     with country <- CountryContext.from_country_code_with_panel_provider(country_code),
          panel_provider <- country.panel_provider,
          pricing_strategy_code <- panel_provider.pricing_strategy_code,
-         pricing_module_name <- DevtestElixir.PricingStrategies.pricing_strategy_module(pricing_strategy_code)
+         pricing_module_name <- DevtestElixir.PricingStrategies.which_module_should_we_run?(pricing_strategy_code)
     do
       pricing_module_name.call()
     end
