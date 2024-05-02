@@ -81,6 +81,10 @@ defmodule DevtestElixir.MixProject do
         "tailwind devtest_elixir --minify",
         "esbuild devtest_elixir --minify",
         "phx.digest"
+      ],
+      "phx.routes": [
+        "phx.routes PrivateAPI.Router",
+        "phx.routes PublicAPI.Router"
       ]
     ]
   end
