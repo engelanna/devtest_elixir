@@ -5,7 +5,7 @@ defmodule DevtestElixir.Schemas.TargetGroup do
 
   import Ecto.Changeset
 
-  alias DevtestElixir.Mixins.SecretCodeContext
+  alias DevtestElixir.Mixins.SecretCodeMixin
   alias DevtestElixir.Schemas.Country
   alias DevtestElixir.Schemas.PanelProvider
 
@@ -28,7 +28,7 @@ defmodule DevtestElixir.Schemas.TargetGroup do
 
   def changeset(target_group, attrs) do
     cast(target_group, attrs, [:external_id, :parent_id, :name, :secret_code, :panel_provider_id])
-    |> SecretCodeContext.put_secret_code_hash_and_salt()
+    |> SecretCodeMixin.put_secret_code_hash_and_salt()
     |> validate_required([:external_id, :name, :secret_code_hash, :secret_code_salt])
     |> cast_assoc(:countries, with: &Country.changeset/2)
     |> validate_being_root_for_country_association(attrs)

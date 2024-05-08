@@ -23,7 +23,7 @@ Degree of isolation |||||
 ---
 
 ###### Security
-- `.secret_code` fields **not** stored in the DB: SHA256 hash & salt [stored instead](https://github.com/engelanna/devtest_elixir/blob/master/lib/devtest_elixir/contexts/shared/secret_code_context.ex#L6-L8) ([spec](https://github.com/engelanna/devtest_elixir/blob/master/test/devtest_elixir/contexts/secret_code_context_test.exs#L12))
+- `.secret_code` fields **not** stored in the DB: SHA256 hash & salt [stored instead](https://github.com/engelanna/devtest_elixir/blob/master/lib/devtest_elixir/contexts/shared/secret_code_mixin.ex#L6-L8) ([spec](https://github.com/engelanna/devtest_elixir/blob/master/test/devtest_elixir/contexts/secret_code_mixin_test.exs#L12))
 - `PublicAPI` exposed to the public - bearer token authentication ([plug](https://github.com/engelanna/devtest_elixir/blob/master/lib/public_api/v1/plugs/verify_token.ex), [spec](https://github.com/engelanna/devtest_elixir/blob/master/test/public_api/v1/plugs/verify_token_test.exs#L33))
   - `.id`s are of type `:uuid` (foils enumeration attacks)
 - `PrivateAPI` internal to the company - no authentication, instead whitelist IPs/SSH keys with your cloud provider

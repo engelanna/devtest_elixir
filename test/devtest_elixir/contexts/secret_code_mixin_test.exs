@@ -1,7 +1,7 @@
-defmodule Test.DevtestElixir.Mixins.SecretCodeContextTest do
+defmodule Test.DevtestElixir.Mixins.SecretCodeMixinTest do
   use Test.Support.DataCase, async: true
 
-  alias DevtestElixir.Mixins.SecretCodeContext
+  alias DevtestElixir.Mixins.SecretCodeMixin
   alias DevtestElixir.Repo
   alias DevtestElixir.Schemas.Location
 
@@ -11,7 +11,7 @@ defmodule Test.DevtestElixir.Mixins.SecretCodeContextTest do
 
   test "computing the hash (from secret_code + salt) in a reproducible way", %{location: location} do
     expected_hash = location.secret_code_hash
-    actual_hash = SecretCodeContext.hash_secret_code_with_salt(
+    actual_hash = SecretCodeMixin.hash_secret_code_with_salt(
       predefined_secret_code(),
       location.secret_code_salt
     )

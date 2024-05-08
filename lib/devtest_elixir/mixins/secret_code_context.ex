@@ -1,4 +1,4 @@
-defmodule DevtestElixir.Mixins.SecretCodeContext do
+defmodule DevtestElixir.Mixins.SecretCodeMixin do
   @moduledoc """
   Prevent storing plain-text secrets in your database. Store a hash and a salt instead.
 
