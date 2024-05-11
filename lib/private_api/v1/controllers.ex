@@ -9,7 +9,7 @@ defmodule PrivateAPI.V1.Controllers do
       import Plug.Conn
 
       plug :put_view,
-        PrivateAPI.V1.Views.dynamic_view_module_for_controller_name(__MODULE__)
+        PrivateAPI.V1.Views.determine_view_name_from_controller_name(__MODULE__)
 
       unquote(PrivateAPI.verified_routes())
     end

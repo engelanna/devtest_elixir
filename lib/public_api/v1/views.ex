@@ -12,7 +12,7 @@ defmodule PublicAPI.V1.Views do
   @doc """
   WhateverController => WhateverView. Called from the related Controllers module.
   """
-  def dynamic_view_module_for_controller_name(controller_name) do
+  def determine_view_name_from_controller_name(controller_name) do
     view_name = String.replace(Atom.to_string(controller_name), "Controller", "View")
 
     String.to_atom(view_name)
