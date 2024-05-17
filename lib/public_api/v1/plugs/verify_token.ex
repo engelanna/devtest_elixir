@@ -13,7 +13,7 @@ defmodule PublicAPI.V1.Plugs.VerifyToken do
   def call(conn, _opts) do
     ["bearer " <> received_api_token] = get_req_header(conn, "authorization")
 
-    if stored_api_token_matched(received_api_token) do
+    if stored_api_token_matched?(received_api_token) do
       conn
     else
       conn
@@ -23,7 +23,7 @@ defmodule PublicAPI.V1.Plugs.VerifyToken do
   end
 
 
-  defp stored_api_token_matched(received_api_token) do
+  defp stored_api_token_matched?(received_api_token) do
     received_api_token == \
       Application.get_env(:devtest_elixir, PublicAPI.Endpoint)[:api_token]
   end
