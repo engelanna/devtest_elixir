@@ -36,10 +36,10 @@ defmodule DevtestElixir.Schemas.TargetGroup do
 
 
   defp validate_being_root_for_country_association(changeset, attrs) do
-    are_countries_involved = Map.get(attrs, :countries) != nil
-    is_parent_id_present = get_field(changeset, :parent_id)
+    are_countries_involved? = Map.get(attrs, :countries) != nil
+    is_parent_id_present? = get_field(changeset, :parent_id)
 
-    validation_passed = !(are_countries_involved && is_parent_id_present)
+    validation_passed = !(are_countries_involved? && is_parent_id_present?)
 
     case validation_passed do
       false -> add_error(changeset, :parent_id,
