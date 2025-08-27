@@ -1,4 +1,4 @@
-### 2 isolated APIs in 1 OTP app (optional read: [full requirements](https://github.com/pbc/devtest))
+### 2 isolated APIs in 1 OpenTelecomPlatform app (optional read: [full requirements](https://github.com/pbc/devtest))
 
 ---
 
